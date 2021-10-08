@@ -16,6 +16,8 @@ class ScoreboardController: UIViewController {
     @IBOutlet weak var dateItemLeft: UIBarButtonItem!
     @IBOutlet weak var dateItemRight: UIBarButtonItem!
     @IBOutlet weak var scoreboardTable: UITableView!
+    private let datePicker : UIDatePicker = UIDatePicker()
+    private let dateFormatter = DateFormatter()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,6 +35,10 @@ class ScoreboardController: UIViewController {
         view.backgroundColor = Colors.backgroundColor
     }
     
+    private func configureDateFormatter() {
+       // dateFormatter.dateFormat = "EEEE MMMM d"
+    }
+    
     private func configureLogoNavigationBar() {
         let logo: UIImage = UIImage(named: "mlblogo")!
         let logoView = UIImageView(frame: CGRect(x: 0, y: 0, width: 40, height: 40))
@@ -44,10 +50,9 @@ class ScoreboardController: UIViewController {
     }
     
     private func configureDateNavigationBar() {
-        let formatter = DateFormatter()
         #warning("make month and day bold")
-        formatter.dateFormat = "EEEE MMMM d"
-        dateNavigationBar.topItem?.title = formatter.string(from: Date())
+        dateFormatter.dateFormat = "EEEE MMMM d"
+        dateNavigationBar.topItem?.title = dateFormatter.string(from: Date())
         dateNavigationBar.isTranslucent = false
         dateNavigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor : Colors.textColor]
         dateNavigationBar.barTintColor = Colors.backgroundColor
@@ -55,6 +60,7 @@ class ScoreboardController: UIViewController {
         dateNavigationBar.layer.borderColor = Colors.separatorColor.cgColor
         configureDateNavigationItems(item: dateItemLeft, left: true)
         configureDateNavigationItems(item: dateItemRight, left: false)
+        configureDatePicker()
     }
     
     private func configureDateNavigationItems(item: UIBarButtonItem, left: Bool) {
@@ -69,12 +75,47 @@ class ScoreboardController: UIViewController {
         item.tintColor = Colors.separatorColor
     }
     
+    private func configureDatePicker() {
+        self.view.addSubview(datePicker)
+        datePicker.isHidden = true
+        datePicker.datePickerMode = .date
+        datePicker.preferredDatePickerStyle = .inline
+        datePicker.backgroundColor = Colors.textColor
+        datePicker.tintColor = Colors.separatorColor
+        datePicker.layer.cornerRadius = 18
+        datePicker.clipsToBounds = true
+        datePicker.addTarget(self, action: #selector(dateChanged(sender:)), for: .valueChanged)
+        let pickerSize : CGSize = datePicker.sizeThatFits(CGSize.zero)
+        #warning("optimize this")
+        datePicker.frame = CGRect(x: 0, y: dateNavigationBar.frame.maxY + 20, width: pickerSize.width, height: pickerSize.height)
+        datePicker.center.x = dateNavigationBar.center.x
+    }
+    
     private func configureScoreboardTable() {
         scoreboardTable.delegate = self
         scoreboardTable.dataSource = self
         scoreboardTable.backgroundColor = Colors.backgroundColor
         scoreboardTable.separatorColor = Colors.separatorColor
         scoreboardTable.rowHeight = UITableView.automaticDimension
+    }
+    
+    
+    @objc func datePressed() {
+        if datePicker.isHidden {
+            datePicker.isHidden = false
+        } else {
+            datePicker.isHidden = true
+        }
+    }
+    
+    @objc func dateChanged(sender:UIDatePicker){
+        dateNavigationBar.topItem?.title = dateFormatter.string(from: sender.date)
+        datePicker.isHidden = true
+        scoreboardTable.reloadData()
+    }
+    
+    @IBAction func dateNavigationBarPressed(_ sender: Any) {
+        datePressed()
     }
     
     @IBAction func dateItemLeftPressed(_ sender: Any) {
