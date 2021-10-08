@@ -74,6 +74,7 @@
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <gestureRecognizers/>
                         <constraints>
                             <constraint firstItem="E0I-7I-WUe" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="2Np-92-4c7"/>
                             <constraint firstItem="oou-cw-qHQ" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="9T8-tJ-IAp"/>
@@ -96,12 +97,13 @@
                         <outlet property="dateNavigationBar" destination="E0I-7I-WUe" id="oyN-fu-bJ6"/>
                         <outlet property="logoNavigationBar" destination="oou-cw-qHQ" id="L82-ST-BUL"/>
                         <outlet property="scoreboardTable" destination="8jN-Ke-E5m" id="3br-Wd-Rmh"/>
+                        <outlet property="tabBar" destination="anQ-ev-mVM" id="tjH-9T-Ecv"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
                 <tapGestureRecognizer id="3Lr-JJ-7SZ">
                     <connections>
-                        <action selector="dateNavigationBarPressed:" destination="BYZ-38-t0r" id="zmQ-8j-4V7"/>
+                        <action selector="dateNavigationBarPressed:" destination="BYZ-38-t0r" id="jTL-mD-ZMC"/>
                     </connections>
                 </tapGestureRecognizer>
             </objects>

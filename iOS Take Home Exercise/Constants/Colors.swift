@@ -13,4 +13,5 @@ struct Colors {
     public static let backgroundColor = UIColor.white
     public static let textColor = UIColor.black
     public static let separatorColor = UIColor.lightGray
+    public static let mlbBlue = UIColor(
 }

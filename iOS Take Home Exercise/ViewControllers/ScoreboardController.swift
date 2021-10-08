@@ -16,6 +16,7 @@ class ScoreboardController: UIViewController {
     @IBOutlet weak var dateItemLeft: UIBarButtonItem!
     @IBOutlet weak var dateItemRight: UIBarButtonItem!
     @IBOutlet weak var scoreboardTable: UITableView!
+    @IBOutlet weak var tabBar: UITabBar!
     private let datePicker : UIDatePicker = UIDatePicker()
     private let dateFormatter = DateFormatter()
     public var currentDate: Date = Date()
@@ -29,7 +30,8 @@ class ScoreboardController: UIViewController {
         configureView()
         configureLogoNavigationBar()
         configureDateNavigationBar()
-        configureScoreboardTable() 
+        configureScoreboardTable()
+        configureTabBar()
     }
     
     private func configureView() {
@@ -37,7 +39,7 @@ class ScoreboardController: UIViewController {
     }
     
     private func configureDateFormatter() {
-       // dateFormatter.dateFormat = "EEEE MMMM d"
+        // dateFormatter.dateFormat = "EEEE MMMM d"
     }
     
     private func configureLogoNavigationBar() {
@@ -100,6 +102,12 @@ class ScoreboardController: UIViewController {
         scoreboardTable.rowHeight = UITableView.automaticDimension
     }
     
+    private func configureTabBar() {
+        tabBar.items = [UITabBarItem(title: "Scores", image: nil, tag: 0)]
+        tabBar.selectedItem = tabBar.items?.first
+        tabBar.barTintColor = Colors.backgroundColor
+        tabBar.tintColor = .blue
+    }
     
     @objc func datePressed() {
         if datePicker.isHidden {
@@ -109,7 +117,7 @@ class ScoreboardController: UIViewController {
         }
     }
     
-    @objc func dateChanged(sender:UIDatePicker) {
+    @objc func dateChanged(sender: UIDatePicker) {
         currentDate = sender.date
         configureDateNavigationBar()
         scoreboardTable.reloadData()
@@ -121,14 +129,13 @@ class ScoreboardController: UIViewController {
     
     @IBAction func dateItemLeftPressed(_ sender: Any) {
         print("left item pressed")
-        #warning("this will go to the previous date and refresh table")
+#warning("this will go to the previous date and refresh table")
     }
     
     @IBAction func dateItemRightPressed(_ sender: Any) {
         print("right item pressed")
-        #warning("this will go to the next date and refresh table")
+#warning("this will go to the next date and refresh table")
     }
-    
 }
 
 extension ScoreboardController: UITableViewDelegate, UITableViewDataSource {
