@@ -8,17 +8,29 @@
 
 import UIKit
 
-class ScoreboardTableCellTableViewCell: UITableViewCell {
+class ScoreboardCell: UITableViewCell {
 
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+        setUpViews()
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 
         // Configure the view for the selected state
+    }
+    
+    private func setData() {
+        
+    }
+    
+    private func setUpViews() {
+        configureView()
+    }
+    
+    private func configureView() {
+        self.backgroundColor = Colors.backgroundColor
     }
 
 }

@@ -5,6 +5,7 @@
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19144"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -16,24 +17,91 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <navigationBar contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="oou-cw-qHQ">
+                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oou-cw-qHQ">
                                 <rect key="frame" x="0.0" y="44" width="414" height="44"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                 <items>
                                     <navigationItem title="Title" id="eHI-Uz-qj9"/>
                                 </items>
                             </navigationBar>
+                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="E0I-7I-WUe">
+                                <rect key="frame" x="0.0" y="108" width="414" height="44"/>
+                                <items>
+                                    <navigationItem title="Title" id="URr-a1-241">
+                                        <barButtonItem key="leftBarButtonItem" title="Item" id="5R2-kk-IA8">
+                                            <connections>
+                                                <action selector="dateItemLeftPressed:" destination="BYZ-38-t0r" id="QXF-Or-ddj"/>
+                                            </connections>
+                                        </barButtonItem>
+                                        <barButtonItem key="rightBarButtonItem" title="Item" id="mSH-eC-yGr">
+                                            <connections>
+                                                <action selector="dateItemRightPressed:" destination="BYZ-38-t0r" id="RKf-gD-lIe"/>
+                                            </connections>
+                                        </barButtonItem>
+                                    </navigationItem>
+                                </items>
+                            </navigationBar>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="8jN-Ke-E5m">
+                                <rect key="frame" x="0.0" y="152" width="414" height="661"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="ScoreboardCell" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="scoreboardCell" rowHeight="183" id="GyB-jO-NY7" customClass="ScoreboardCell" customModule="iOS_Take_Home_Exercise" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="44.5" width="414" height="183"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="GyB-jO-NY7" id="aes-HP-uqC">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="183"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="BYZ-38-t0r" id="1NH-HB-1gN"/>
+                                    <outlet property="delegate" destination="BYZ-38-t0r" id="8CW-pO-9XO"/>
+                                </connections>
+                            </tableView>
+                            <tabBar contentMode="scaleToFill" id="anQ-ev-mVM">
+                                <rect key="frame" x="0.0" y="813" width="414" height="49"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <items>
+                                    <tabBarItem systemItem="favorites" id="Lit-b7-SRK"/>
+                                    <tabBarItem systemItem="more" id="2DJ-cR-L2t"/>
+                                </items>
+                            </tabBar>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="E0I-7I-WUe" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="2Np-92-4c7"/>
+                            <constraint firstItem="oou-cw-qHQ" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="9T8-tJ-IAp"/>
+                            <constraint firstItem="oou-cw-qHQ" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="Rjp-ic-Knu"/>
+                            <constraint firstItem="oou-cw-qHQ" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="XVf-qJ-7Yy"/>
+                            <constraint firstItem="8jN-Ke-E5m" firstAttribute="top" secondItem="E0I-7I-WUe" secondAttribute="bottom" id="fq8-eo-0NX"/>
+                            <constraint firstItem="E0I-7I-WUe" firstAttribute="top" secondItem="oou-cw-qHQ" secondAttribute="bottom" constant="20" id="gle-eR-Zdr"/>
+                            <constraint firstItem="8jN-Ke-E5m" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="hWK-ZL-ZD5"/>
+                            <constraint firstItem="oou-cw-qHQ" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="k6o-xx-yqV"/>
+                            <constraint firstItem="oou-cw-qHQ" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="kmP-xB-gAp"/>
+                            <constraint firstItem="8jN-Ke-E5m" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="lRH-cP-07k"/>
+                            <constraint firstItem="anQ-ev-mVM" firstAttribute="top" secondItem="8jN-Ke-E5m" secondAttribute="bottom" id="m9i-Ob-J4d"/>
+                            <constraint firstItem="E0I-7I-WUe" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="rAz-Lu-i8N"/>
+                            <constraint firstItem="oou-cw-qHQ" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="t2O-cZ-BgC"/>
+                        </constraints>
                     </view>
                     <connections>
-                        <outlet property="navigationBar" destination="oou-cw-qHQ" id="cTC-Fn-Rra"/>
+                        <outlet property="dateItemLeft" destination="5R2-kk-IA8" id="bHS-F0-yl3"/>
+                        <outlet property="dateItemRight" destination="mSH-eC-yGr" id="pd2-w7-Wze"/>
+                        <outlet property="dateNavigationBar" destination="E0I-7I-WUe" id="oyN-fu-bJ6"/>
+                        <outlet property="logoNavigationBar" destination="oou-cw-qHQ" id="L82-ST-BUL"/>
+                        <outlet property="scoreboardTable" destination="8jN-Ke-E5m" id="3br-Wd-Rmh"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-103" y="1"/>
+            <point key="canvasLocation" x="-104.34782608695653" y="0.6696428571428571"/>
         </scene>
     </scenes>
+    <resources>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
 </document>

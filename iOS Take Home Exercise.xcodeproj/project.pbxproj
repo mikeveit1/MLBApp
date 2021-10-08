@@ -15,7 +15,8 @@
 		1C2C34DD21FB50A800482E87 /* iOS_Take_Home_ExerciseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C2C34DC21FB50A800482E87 /* iOS_Take_Home_ExerciseTests.swift */; };
 		1C2C34E821FB50A800482E87 /* iOS_Take_Home_ExerciseUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C2C34E721FB50A800482E87 /* iOS_Take_Home_ExerciseUITests.swift */; };
 		1C2C34F921FB573000482E87 /* iOSScoreboardMockup.png in Resources */ = {isa = PBXBuildFile; fileRef = 1C2C34F821FB573000482E87 /* iOSScoreboardMockup.png */; };
-		AD6003542710B0EC00DF84FF /* ScoreboardTableCellTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD6003532710B0EC00DF84FF /* ScoreboardTableCellTableViewCell.swift */; };
+		AD6003542710B0EC00DF84FF /* ScoreboardCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD6003532710B0EC00DF84FF /* ScoreboardCell.swift */; };
+		ADB55C0F2710B9D200D0A0DC /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADB55C0E2710B9D200D0A0DC /* Colors.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,7 +52,8 @@
 		1C2C34E921FB50A800482E87 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1C2C34F521FB512C00482E87 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		1C2C34F821FB573000482E87 /* iOSScoreboardMockup.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = iOSScoreboardMockup.png; sourceTree = "<group>"; };
-		AD6003532710B0EC00DF84FF /* ScoreboardTableCellTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScoreboardTableCellTableViewCell.swift; sourceTree = "<group>"; };
+		AD6003532710B0EC00DF84FF /* ScoreboardCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScoreboardCell.swift; sourceTree = "<group>"; };
+		ADB55C0E2710B9D200D0A0DC /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -104,6 +106,7 @@
 		1C2C34C621FB50A600482E87 /* iOS Take Home Exercise */ = {
 			isa = PBXGroup;
 			children = (
+				ADB55C0D2710B9C500D0A0DC /* Constants */,
 				AD6003522710B0D500DF84FF /* TableViewCells */,
 				AD6003512710AFEC00DF84FF /* DataModel */,
 				AD6003502710AFDD00DF84FF /* Storyboards */,
@@ -168,9 +171,17 @@
 		AD6003522710B0D500DF84FF /* TableViewCells */ = {
 			isa = PBXGroup;
 			children = (
-				AD6003532710B0EC00DF84FF /* ScoreboardTableCellTableViewCell.swift */,
+				AD6003532710B0EC00DF84FF /* ScoreboardCell.swift */,
 			);
 			path = TableViewCells;
+			sourceTree = "<group>";
+		};
+		ADB55C0D2710B9C500D0A0DC /* Constants */ = {
+			isa = PBXGroup;
+			children = (
+				ADB55C0E2710B9D200D0A0DC /* Colors.swift */,
+			);
+			path = Constants;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -308,7 +319,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AD6003542710B0EC00DF84FF /* ScoreboardTableCellTableViewCell.swift in Sources */,
+				AD6003542710B0EC00DF84FF /* ScoreboardCell.swift in Sources */,
+				ADB55C0F2710B9D200D0A0DC /* Colors.swift in Sources */,
 				1C2C34CA21FB50A600482E87 /* ScoreboardController.swift in Sources */,
 				1C2C34C821FB50A600482E87 /* AppDelegate.swift in Sources */,
 			);
