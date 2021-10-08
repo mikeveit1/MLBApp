@@ -18,6 +18,7 @@ class ScoreboardController: UIViewController {
     @IBOutlet weak var scoreboardTable: UITableView!
     private let datePicker : UIDatePicker = UIDatePicker()
     private let dateFormatter = DateFormatter()
+    public var currentDate: Date = Date()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -52,7 +53,7 @@ class ScoreboardController: UIViewController {
     private func configureDateNavigationBar() {
         #warning("make month and day bold")
         dateFormatter.dateFormat = "EEEE MMMM d"
-        dateNavigationBar.topItem?.title = dateFormatter.string(from: Date())
+        dateNavigationBar.topItem?.title = dateFormatter.string(from: currentDate)
         dateNavigationBar.isTranslucent = false
         dateNavigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor : Colors.textColor]
         dateNavigationBar.barTintColor = Colors.backgroundColor
@@ -108,9 +109,9 @@ class ScoreboardController: UIViewController {
         }
     }
     
-    @objc func dateChanged(sender:UIDatePicker){
-        dateNavigationBar.topItem?.title = dateFormatter.string(from: sender.date)
-        datePicker.isHidden = true
+    @objc func dateChanged(sender:UIDatePicker) {
+        currentDate = sender.date
+        configureDateNavigationBar()
         scoreboardTable.reloadData()
     }
     
