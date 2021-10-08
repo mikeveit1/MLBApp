@@ -106,7 +106,7 @@ class ScoreboardController: UIViewController {
         tabBar.items = [UITabBarItem(title: "Scores", image: nil, tag: 0)]
         tabBar.selectedItem = tabBar.items?.first
         tabBar.barTintColor = Colors.backgroundColor
-        tabBar.tintColor = .blue
+        tabBar.tintColor = Colors.mlbBlue
     }
     
     @objc func datePressed() {
