@@ -102,10 +102,10 @@
 		1C2C34C621FB50A600482E87 /* iOS Take Home Exercise */ = {
 			isa = PBXGroup;
 			children = (
+				AD6003512710AFEC00DF84FF /* DataModel */,
+				AD6003502710AFDD00DF84FF /* Storyboards */,
 				AD60034F2710AEBE00DF84FF /* SupportingFiles */,
 				AD60034E2710AEB200DF84FF /* ViewControllers */,
-				1C2C34CB21FB50A600482E87 /* Main.storyboard */,
-				1C2C34D021FB50A800482E87 /* LaunchScreen.storyboard */,
 			);
 			path = "iOS Take Home Exercise";
 			sourceTree = "<group>";
@@ -144,6 +144,22 @@
 				1C2C34C721FB50A600482E87 /* AppDelegate.swift */,
 			);
 			path = SupportingFiles;
+			sourceTree = "<group>";
+		};
+		AD6003502710AFDD00DF84FF /* Storyboards */ = {
+			isa = PBXGroup;
+			children = (
+				1C2C34CB21FB50A600482E87 /* Main.storyboard */,
+				1C2C34D021FB50A800482E87 /* LaunchScreen.storyboard */,
+			);
+			path = Storyboards;
+			sourceTree = "<group>";
+		};
+		AD6003512710AFEC00DF84FF /* DataModel */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = DataModel;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
