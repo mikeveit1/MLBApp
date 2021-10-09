@@ -20,10 +20,74 @@ class ScoreboardController: UIViewController {
     private let datePicker : UIDatePicker = UIDatePicker()
     private let dateFormatter = DateFormatter()
     public var currentDate: Date = Date()
+    public var dates: [GameDate] = []
+    public var scores: [ScoreDisplay] = []
+    private var totalGames: Int = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setUpViews()
+        getData()
+        mapDataToScores()
+    }
+    
+    private func getData() {
+        DataService.shared.getData() { (data) in
+            do {
+                let decoder = JSONDecoder()
+                let json = try decoder.decode(Response.self, from: data)
+                self.dates.append(contentsOf: json.dates)
+            } catch {
+                DispatchQueue.main.async {
+                    self.showErrorAlert(title: "Error", message: error.localizedDescription)
+                }
+            }
+        } errorHandler: {(error: Error) -> () in
+            print(error.localizedDescription)
+            showErrorAlert(title: "Error", message: error.localizedDescription)
+        }
+    }
+    
+    private func mapDataToScores() {
+        for date in dates {
+            var score = ScoreDisplay(awayTeamName: "", awayTeamRecord: "", homeTeamName: "", homeTeamRecord: "", awayTeamScore: 0, homeTeamScore: 0, inning: 0, gameState: "", scheduledInnings: 0)
+           /* for game in date.games {
+                for status in game.status {
+                    score.gameState = status.detailedState
+                }
+                for team in game.teams {
+                    for away in team.awayTeam {
+                        for record in away.leagueRecords {
+                            score.awayTeamRecord = "\(record.wins)-\(record.losses)"
+                        }
+                        for team in away.team {
+                            score.awayTeamName = team.teamName
+                        }
+                    }
+                    for home in team.homeTeam {
+                        for record in home.leagueRecords {
+                            score.homeTeamRecord = "\(record.wins)-\(record.losses)"
+                        }
+                        for team in home.team {
+                            score.awayTeamName = team.teamName
+                        }
+                    }
+                }
+                for linescore in game.linescore {
+                    score.inning =  linescore.currentInning
+                    score.scheduledInnings = linescore.scheduledInnings
+                    for team in linescore.linescoreTeams {
+                        for home in team.home {
+                            score.homeTeamScore = home.runs
+                        }
+                        for away in team.away {
+                            score.awayTeamScore = away.runs
+                        }
+                    }
+                }
+            }
+            scores.append(score) */
+        }
     }
     
     private func setUpViews() {
@@ -140,12 +204,12 @@ class ScoreboardController: UIViewController {
 
 extension ScoreboardController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
+        return totalGames
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "scoreboardCell") as! ScoreboardCell
-        
+        cell.setData(scores: scores[indexPath.row])
         return cell
     }
 }

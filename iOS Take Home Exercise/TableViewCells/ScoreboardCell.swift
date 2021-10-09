@@ -36,8 +36,8 @@ class ScoreboardCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
-    private func setData() {
-        
+    public func setData(scores: ScoreDisplay) {
+        configureAwayNameLabel(name: scores.awayTeamName)
     }
     
     private func setUpViews() {
@@ -57,14 +57,14 @@ class ScoreboardCell: UITableViewCell {
     
     private func configureTeamStackView() {
         
-        configureAwayNameLabel()
         configureAwayRecordLabel()
         configureHomeNameLabel()
         configureHomeRecordLabel()
     }
     
-    private func configureAwayNameLabel() {
-        
+    private func configureAwayNameLabel(name: String) {
+        awayNameLabel.textColor = Colors.textColor
+        awayNameLabel.text = name
     }
     
     private func configureAwayRecordLabel() {
