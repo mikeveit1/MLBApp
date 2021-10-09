@@ -64,7 +64,7 @@ class ScoreboardCell: UITableViewCell {
         label.text = data
     }
     
-    enum GameStatus: String {
+    private enum GameStatus: String {
         case notStarted = "Not_Started"
         case inProgress = "In_Progress"
         case completed = "Final"
