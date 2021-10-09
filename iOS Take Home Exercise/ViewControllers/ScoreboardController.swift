@@ -81,9 +81,6 @@ class ScoreboardController: UIViewController {
     
     private func addTestCases() {
         //Using this function to show different game state cases
-        let officialDateFormatter = DateFormatter()
-        dateFormatter.dateFormat = officialDateFormat
-        let officialDate = officialDateFormatter.date(from: "2018-09-19") ?? currentDate
         let gameDateFormatter = DateFormatter()
         gameDateFormatter.dateFormat = gameDateFormat
         let gameDate = gameDateFormatter.date(from: "2018-09-20T17:10:00Z")!
@@ -93,10 +90,10 @@ class ScoreboardController: UIViewController {
         let homeTeamRecord = "61-92"
         let scheduledInnings = 9
         let cases = [
-        ScoreDisplay(officialDate: officialDate, gameDate: gameDate, awayTeamName: awayTeam, awayTeamRecord: awayTeamRecord, homeTeamName: homeTeam, homeTeamRecord: homeTeamRecord, awayTeamScore: 5, homeTeamScore: 2, inning: 7, inningOrdinal: "7th", inningHalf: "Top", gameState: "In_Progress", scheduledInnings: scheduledInnings),
-        ScoreDisplay(officialDate: officialDate, gameDate: gameDate, awayTeamName: awayTeam, awayTeamRecord: awayTeamRecord, homeTeamName: homeTeam, homeTeamRecord: homeTeamRecord, awayTeamScore: 0, homeTeamScore: 0, inning: 0, inningOrdinal: "", inningHalf: "", gameState: "Not_Started", scheduledInnings: scheduledInnings),
-        ScoreDisplay(officialDate: officialDate, gameDate: gameDate, awayTeamName: awayTeam, awayTeamRecord: awayTeamRecord, homeTeamName: homeTeam, homeTeamRecord: homeTeamRecord, awayTeamScore: 1, homeTeamScore: 0, inning: 10, inningOrdinal: "10th", inningHalf: "Bottom", gameState: "Final", scheduledInnings: scheduledInnings),
-        ScoreDisplay(officialDate: officialDate, gameDate: gameDate, awayTeamName: awayTeam, awayTeamRecord: awayTeamRecord, homeTeamName: homeTeam, homeTeamRecord: homeTeamRecord, awayTeamScore: 2, homeTeamScore: 4, inning: 7, inningOrdinal: "7th", inningHalf: "Bottom", gameState: "Final", scheduledInnings: scheduledInnings)
+        ScoreDisplay(officialDate: currentDate, gameDate: gameDate, awayTeamName: awayTeam, awayTeamRecord: awayTeamRecord, homeTeamName: homeTeam, homeTeamRecord: homeTeamRecord, awayTeamScore: 5, homeTeamScore: 2, inning: 7, inningOrdinal: "7th", inningHalf: "Top", gameState: "In_Progress", scheduledInnings: scheduledInnings),
+        ScoreDisplay(officialDate: currentDate, gameDate: gameDate, awayTeamName: awayTeam, awayTeamRecord: awayTeamRecord, homeTeamName: homeTeam, homeTeamRecord: homeTeamRecord, awayTeamScore: 0, homeTeamScore: 0, inning: 0, inningOrdinal: "", inningHalf: "", gameState: "Not_Started", scheduledInnings: scheduledInnings),
+        ScoreDisplay(officialDate: currentDate, gameDate: gameDate, awayTeamName: awayTeam, awayTeamRecord: awayTeamRecord, homeTeamName: homeTeam, homeTeamRecord: homeTeamRecord, awayTeamScore: 1, homeTeamScore: 0, inning: 10, inningOrdinal: "10th", inningHalf: "Bottom", gameState: "Final", scheduledInnings: scheduledInnings),
+        ScoreDisplay(officialDate: currentDate, gameDate: gameDate, awayTeamName: awayTeam, awayTeamRecord: awayTeamRecord, homeTeamName: homeTeam, homeTeamRecord: homeTeamRecord, awayTeamScore: 2, homeTeamScore: 4, inning: 7, inningOrdinal: "7th", inningHalf: "Bottom", gameState: "Final", scheduledInnings: scheduledInnings)
             ]
         scores.append(contentsOf: cases)
     }
