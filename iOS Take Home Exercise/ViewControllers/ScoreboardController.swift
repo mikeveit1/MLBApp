@@ -54,12 +54,14 @@ class ScoreboardController: UIViewController {
     }
     
     private func mapDataToScores() {
-        var score = ScoreDisplay(gameDate: Date(), awayTeamName: "", awayTeamRecord: "", homeTeamName: "", homeTeamRecord: "", awayTeamScore: 0, homeTeamScore: 0, inning: 0, gameState: "", scheduledInnings: 0)
+        var score = ScoreDisplay(officialDate: Date(), gameDate: Date(), awayTeamName: "", awayTeamRecord: "", homeTeamName: "", homeTeamRecord: "", awayTeamScore: 0, homeTeamScore: 0, inning: 0, gameState: "", scheduledInnings: 0)
         for date in dates {
             dateFormatter.dateFormat = "yyyy-MM-dd"
-            score.gameDate = dateFormatter.date(from: date.date)!
-            currentDate = score.gameDate
+            score.officialDate = dateFormatter.date(from: date.date)!
+            currentDate = score.officialDate
             for game in date.games {
+                dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
+                score.gameDate = dateFormatter.date(from: game.gameDate)!
                 score.awayTeamName = game.teams.away.team.teamName
                 score.awayTeamScore = game.linescore.teams.away.runs
                 score.awayTeamRecord = "\(game.teams.away.leagueRecord.wins) - \(game.teams.away.leagueRecord.losses)"
@@ -72,7 +74,7 @@ class ScoreboardController: UIViewController {
                 scores.append(score)
             }
         }
-        filteredScores.append(contentsOf: scores)
+        filteredScores.append(contentsOf: scores.sorted(by: {$0.gameDate < $1.gameDate}))
     }
 
     private func setUpViews() {
@@ -161,7 +163,7 @@ class ScoreboardController: UIViewController {
             currentDate = date!
         }
         configureDateNavigationBar()
-        filteredScores = scores.filter({$0.gameDate == currentDate})
+        filteredScores = scores.filter({$0.officialDate == currentDate})
         scoreboardTable.reloadData()
     }
     
