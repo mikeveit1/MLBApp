@@ -158,7 +158,8 @@ class ScoreboardController: UIViewController {
         datePicker.clipsToBounds = true
         datePicker.addTarget(self, action: #selector(dateChanged(sender:)), for: .valueChanged)
         #warning("fix so date picker looks correct on iPad and iPhone")
-        datePicker.frame = CGRect(x: 0, y: dateNavigationBar.frame.maxY + 8, width: view.frame.width / 1.05, height: view.frame.height / 2.5)
+        let size = self.view.frame.size
+        datePicker.frame = CGRect(x: 0, y: dateNavigationBar.frame.maxY + 8, width: size.width - 40, height: size.height - 550)
         datePicker.center.x = dateNavigationBar.center.x
     }
     
@@ -184,8 +185,10 @@ class ScoreboardController: UIViewController {
         let swipeLeft = UISwipeGestureRecognizer(target: self, action: #selector(dateItemRightPressed(_:)))
         swipeLeft.direction = .left
         self.view.addGestureRecognizer(swipeLeft)
+        let handlePicker = UITapGestureRecognizer(target: self, action: #selector(handleDatePicker))
         let closePicker = UITapGestureRecognizer(target: self, action: #selector(hideDatePicker))
-        self.view.addGestureRecognizer(closePicker)
+        dateNavigationBar.addGestureRecognizer(handlePicker)
+        scoreboardTable.addGestureRecognizer(closePicker)
     }
     
     private func incrementDate(increment: Int, date: Date?) {
@@ -214,11 +217,7 @@ class ScoreboardController: UIViewController {
     @objc func dateChanged(sender: UIDatePicker) {
         incrementDate(increment: 0, date: sender.date)
     }
-    
-    @IBAction func dateNavigationBarPressed(_ sender: Any) {
-        handleDatePicker()
-    }
-    
+
     @IBAction func dateItemLeftPressed(_ sender: Any) {
         incrementDate(increment: -1, date: nil)
     }
@@ -230,7 +229,7 @@ class ScoreboardController: UIViewController {
 
 extension ScoreboardController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        #warning("should i put his condition in a variable? doesnt work when i try")
+        #warning("should i put his condition in a variable? doesnt work when i try...maybe an enum?")
         if filteredScores.count > 0 {
             return filteredScores.count
         } else {
