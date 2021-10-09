@@ -11,9 +11,9 @@ import UIKit
 
 struct Fonts {
     public static let smallFont = UIFont.systemFont(ofSize: 13)
-    public static let smallFontBold = UIFont.systemFont(ofSize: 13, weight: .bold)
+    public static let smallFontBold = UIFont.boldSystemFont(ofSize: 13)
     public static let mediumFont = UIFont.systemFont(ofSize: 17)
-    public static let mediumFontBold =  UIFont.systemFont(ofSize: 17, weight: .bold)
+    public static let mediumFontBold =  UIFont.boldSystemFont(ofSize: 17)
     public static let largeFont = UIFont.systemFont(ofSize: 28)
-    public static let largeFontBold = UIFont.systemFont(ofSize: 28, weight: .bold)
+    public static let largeFontBold = UIFont.boldSystemFont(ofSize: 28)
 }

@@ -31,6 +31,7 @@
 		AD1647A727111485004731E1 /* LinescoreTeams.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD1647A627111485004731E1 /* LinescoreTeams.swift */; };
 		AD4963952711F1820009C63F /* Fonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD4963942711F1820009C63F /* Fonts.swift */; };
 		AD4BAE2C27122324005440EA /* DateFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD4BAE2B27122324005440EA /* DateFormatter.swift */; };
+		AD4BAE2E27124778005440EA /* StringFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD4BAE2D27124778005440EA /* StringFormatter.swift */; };
 		AD6003542710B0EC00DF84FF /* ScoreboardCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD6003532710B0EC00DF84FF /* ScoreboardCell.swift */; };
 		ADB55C0F2710B9D200D0A0DC /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADB55C0E2710B9D200D0A0DC /* Colors.swift */; };
 /* End PBXBuildFile section */
@@ -84,6 +85,7 @@
 		AD1647A627111485004731E1 /* LinescoreTeams.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinescoreTeams.swift; sourceTree = "<group>"; };
 		AD4963942711F1820009C63F /* Fonts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fonts.swift; sourceTree = "<group>"; };
 		AD4BAE2B27122324005440EA /* DateFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateFormatter.swift; sourceTree = "<group>"; };
+		AD4BAE2D27124778005440EA /* StringFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringFormatter.swift; sourceTree = "<group>"; };
 		AD6003532710B0EC00DF84FF /* ScoreboardCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScoreboardCell.swift; sourceTree = "<group>"; };
 		ADB55C0E2710B9D200D0A0DC /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -244,6 +246,7 @@
 				ADB55C0E2710B9D200D0A0DC /* Colors.swift */,
 				AD4963942711F1820009C63F /* Fonts.swift */,
 				AD4BAE2B27122324005440EA /* DateFormatter.swift */,
+				AD4BAE2D27124778005440EA /* StringFormatter.swift */,
 			);
 			path = Constants;
 			sourceTree = "<group>";
@@ -384,6 +387,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				AD1647942710E26E004731E1 /* Linescore.swift in Sources */,
+				AD4BAE2E27124778005440EA /* StringFormatter.swift in Sources */,
 				AD1647A727111485004731E1 /* LinescoreTeams.swift in Sources */,
 				AD6003542710B0EC00DF84FF /* ScoreboardCell.swift in Sources */,
 				ADB55C0F2710B9D200D0A0DC /* Colors.swift in Sources */,

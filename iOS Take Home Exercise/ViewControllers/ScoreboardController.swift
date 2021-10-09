@@ -80,6 +80,7 @@ class ScoreboardController: UIViewController {
     }
     
     private func addTestCases() {
+        #warning("am i keeping this?")
         //Using this function to show different game state cases
         let gameDateFormatter = DateFormatter()
         gameDateFormatter.dateFormat = gameDateFormat
@@ -122,8 +123,15 @@ class ScoreboardController: UIViewController {
     
     private func configureDateNavigationBar() {
         #warning("make month and day bold")
-        dateFormatter.dateFormat = "EEEE MMMM d"
-        dateNavigationBar.topItem?.title = dateFormatter.string(from: currentDate)
+        let dateLabel = UILabel()
+        dateLabel.textColor = Colors.textColor
+        dateFormatter.dateFormat = dayOfWeekFormat
+        let dayOfWeekString = dateFormatter.string(from: currentDate)
+        dateFormatter.dateFormat = monthDayFormat
+        let monthDayString = dateFormatter.string(from: currentDate)
+        let currentDateString = "\(dayOfWeekString) \(monthDayString)"
+        dateLabel.attributedText = formatAttributedString(string: currentDateString, range: monthDayString, attributes: [NSAttributedString.Key.font: Fonts.mediumFontBold])
+        dateNavigationBar.topItem?.titleView = dateLabel
         dateNavigationBar.isTranslucent = false
         dateNavigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor : Colors.textColor]
         dateNavigationBar.barTintColor = Colors.backgroundColor
