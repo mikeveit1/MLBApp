@@ -18,7 +18,6 @@ class ScoreboardController: UIViewController {
     @IBOutlet weak var scoreboardTable: UITableView!
     @IBOutlet weak var tabBar: UITabBar!
     private let datePicker : UIDatePicker = UIDatePicker()
-    private let dateFormatter = DateFormatter()
     public var currentDate: Date = Date()
     public var dates: [GameDate] = []
     public var scores: [ScoreDisplay] = []
@@ -54,7 +53,7 @@ class ScoreboardController: UIViewController {
     }
     
     private func mapDataToScores() {
-        var score = ScoreDisplay(officialDate: Date(), gameDate: Date(), awayTeamName: "", awayTeamRecord: "", homeTeamName: "", homeTeamRecord: "", awayTeamScore: 0, homeTeamScore: 0, inning: 0, gameState: "", scheduledInnings: 0)
+        var score = ScoreDisplay(officialDate: Date(), gameDate: Date(), awayTeamName: "", awayTeamRecord: "", homeTeamName: "", homeTeamRecord: "", awayTeamScore: 0, homeTeamScore: 0, inning: 0, inningOrdinal: "0", inningHalf: "Top", gameState: "", scheduledInnings: 0)
         for date in dates {
             dateFormatter.dateFormat = "yyyy-MM-dd"
             score.officialDate = dateFormatter.date(from: date.date)!
@@ -69,6 +68,8 @@ class ScoreboardController: UIViewController {
                 score.homeTeamScore = game.linescore.teams.home.runs
                 score.homeTeamRecord = "\(game.teams.home.leagueRecord.wins) - \(game.teams.home.leagueRecord.losses)"
                 score.inning = game.linescore.currentInning
+                score.inningOrdinal = game.linescore.currentInningOrdinal
+                score.inningHalf = game.linescore.inningHalf
                 score.gameState = game.status.detailedState
                 score.scheduledInnings = game.linescore.scheduledInnings
                 scores.append(score)

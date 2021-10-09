@@ -30,6 +30,7 @@
 		AD1647A527111301004731E1 /* GameTeam.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD1647A427111301004731E1 /* GameTeam.swift */; };
 		AD1647A727111485004731E1 /* LinescoreTeams.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD1647A627111485004731E1 /* LinescoreTeams.swift */; };
 		AD4963952711F1820009C63F /* Fonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD4963942711F1820009C63F /* Fonts.swift */; };
+		AD4BAE2C27122324005440EA /* DateFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD4BAE2B27122324005440EA /* DateFormatter.swift */; };
 		AD6003542710B0EC00DF84FF /* ScoreboardCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD6003532710B0EC00DF84FF /* ScoreboardCell.swift */; };
 		ADB55C0F2710B9D200D0A0DC /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADB55C0E2710B9D200D0A0DC /* Colors.swift */; };
 /* End PBXBuildFile section */
@@ -82,6 +83,7 @@
 		AD1647A427111301004731E1 /* GameTeam.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameTeam.swift; sourceTree = "<group>"; };
 		AD1647A627111485004731E1 /* LinescoreTeams.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinescoreTeams.swift; sourceTree = "<group>"; };
 		AD4963942711F1820009C63F /* Fonts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fonts.swift; sourceTree = "<group>"; };
+		AD4BAE2B27122324005440EA /* DateFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateFormatter.swift; sourceTree = "<group>"; };
 		AD6003532710B0EC00DF84FF /* ScoreboardCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScoreboardCell.swift; sourceTree = "<group>"; };
 		ADB55C0E2710B9D200D0A0DC /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -241,6 +243,7 @@
 			children = (
 				ADB55C0E2710B9D200D0A0DC /* Colors.swift */,
 				AD4963942711F1820009C63F /* Fonts.swift */,
+				AD4BAE2B27122324005440EA /* DateFormatter.swift */,
 			);
 			path = Constants;
 			sourceTree = "<group>";
@@ -384,6 +387,7 @@
 				AD1647A727111485004731E1 /* LinescoreTeams.swift in Sources */,
 				AD6003542710B0EC00DF84FF /* ScoreboardCell.swift in Sources */,
 				ADB55C0F2710B9D200D0A0DC /* Colors.swift in Sources */,
+				AD4BAE2C27122324005440EA /* DateFormatter.swift in Sources */,
 				AD1647902710E19B004731E1 /* Team.swift in Sources */,
 				AD1647A12710E4CD004731E1 /* ErrorAlert.swift in Sources */,
 				AD1647842710DED2004731E1 /* GameDate.swift in Sources */,

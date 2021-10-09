@@ -18,6 +18,8 @@ struct ScoreDisplay  {
     var awayTeamScore: Int
     var homeTeamScore: Int
     var inning: Int
+    var inningOrdinal: String
+    var inningHalf: String
     var gameState: String
     var scheduledInnings: Int
 }

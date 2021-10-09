@@ -14,6 +14,6 @@ struct Fonts {
     public static let smallFontBold = UIFont.systemFont(ofSize: 13, weight: .bold)
     public static let mediumFont = UIFont.systemFont(ofSize: 17)
     public static let mediumFontBold =  UIFont.systemFont(ofSize: 17, weight: .bold)
-    public static let largeFont = UIFont.systemFont(ofSize: 24)
-    public static let largeFontBold = UIFont.systemFont(ofSize: 24, weight: .bold)
+    public static let largeFont = UIFont.systemFont(ofSize: 28)
+    public static let largeFontBold = UIFont.systemFont(ofSize: 28, weight: .bold)
 }

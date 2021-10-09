@@ -55,21 +55,45 @@ class ScoreboardCell: UITableViewCell {
         configureLabel(label: awayScoreLabel, color: Colors.textColor, font: Fonts.largeFont, data: "\(score.awayTeamScore)")
         configureLabel(label: homeScoreLabel, color: Colors.textColor, font: Fonts.largeFont, data: "\(score.homeTeamScore)")
         var status = String()
-        if score.gameState == "Final" {
-            status = score.gameState
-            if score.inning != score.scheduledInnings {
-                status = "F/\(score.inning)"
+        if let state = GameStatus.init(rawValue: score.gameState) {
+            switch state {
+            case .completed:
+                status = score.gameState
+                if score.inning != score.scheduledInnings {
+                    status = "F/\(score.inning)"
+                }
+                break
+            case .inProgress:
+                status = "\(score.inningHalf) \(score.inningOrdinal)"
+                break
+            case .notStarted:
+                dateFormatter.dateFormat = "h:mm a"
+                status = dateFormatter.string(from: score.gameDate)
+                break
             }
-        } else {
-            status = "\(score.inning)"
         }
-        configureLabel(label: inningLabel, color: Colors.mlbBlue, font: Fonts.mediumFontBold, data: status)
-    }
+       /* if score.inning == score.scheduledInnings {
+            if score.gameState == "Final" {
+                status = score.gameState
+                if score.inning != score.scheduledInnings {
+                    status = "F/\(score.inning)"
+                }
+            } else {
+                status = "\(score.inning)"
+            }*/
+            configureLabel(label: inningLabel, color: Colors.mlbBlue, font: Fonts.mediumFont, data: status)
+        }
     
     private func configureLabel(label: UILabel, color: UIColor, font: UIFont, data: String) {
         allLabels.append(label)
         label.textColor = color
         label.font = font
         label.text = data
+    }
+    
+    enum GameStatus: String {
+        case notStarted = "Not_Started"
+        case inProgress = "In_Progress"
+        case completed = "Final"
     }
 }
