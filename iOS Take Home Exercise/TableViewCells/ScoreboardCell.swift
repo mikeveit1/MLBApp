@@ -54,34 +54,7 @@ class ScoreboardCell: UITableViewCell {
         configureLabel(label: homeRecordLabel, color: Colors.separatorColor, font: Fonts.smallFont, data: score.homeTeamRecord)
         configureLabel(label: awayScoreLabel, color: Colors.textColor, font: Fonts.largeFont, data: "\(score.awayTeamScore)")
         configureLabel(label: homeScoreLabel, color: Colors.textColor, font: Fonts.largeFont, data: "\(score.homeTeamScore)")
-        var status = String()
-        if let state = GameStatus.init(rawValue: score.gameState) {
-            switch state {
-            case .completed:
-                status = score.gameState
-                if score.inning != score.scheduledInnings {
-                    status = "F/\(score.inning)"
-                }
-                break
-            case .inProgress:
-                status = "\(score.inningHalf) \(score.inningOrdinal)"
-                break
-            case .notStarted:
-                dateFormatter.dateFormat = "h:mm a"
-                status = dateFormatter.string(from: score.gameDate)
-                break
-            }
-        }
-       /* if score.inning == score.scheduledInnings {
-            if score.gameState == "Final" {
-                status = score.gameState
-                if score.inning != score.scheduledInnings {
-                    status = "F/\(score.inning)"
-                }
-            } else {
-                status = "\(score.inning)"
-            }*/
-            configureLabel(label: inningLabel, color: Colors.mlbBlue, font: Fonts.mediumFont, data: status)
+        configureLabel(label: inningLabel, color: Colors.mlbBlue, font: Fonts.mediumFont, data: getGameStatus(score: score))
         }
     
     private func configureLabel(label: UILabel, color: UIColor, font: UIFont, data: String) {
@@ -95,5 +68,27 @@ class ScoreboardCell: UITableViewCell {
         case notStarted = "Not_Started"
         case inProgress = "In_Progress"
         case completed = "Final"
+    }
+    
+    private func getGameStatus(score: ScoreDisplay) -> String {
+        var status = String()
+        if let state = GameStatus.init(rawValue: score.gameState) {
+            switch state {
+            case .completed:
+                status = score.gameState
+                if score.inning != score.scheduledInnings {
+                    status = "F/\(score.inning)"
+                }
+                break
+            case .inProgress:
+                status = "\(score.inningHalf) \(score.inningOrdinal)"
+                break
+            case .notStarted:
+                dateFormatter.dateFormat = timeFormat
+                status = dateFormatter.string(from: score.gameDate)
+                break
+            }
+        }
+        return status
     }
 }

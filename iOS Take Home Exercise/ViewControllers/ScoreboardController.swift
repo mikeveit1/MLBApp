@@ -55,11 +55,11 @@ class ScoreboardController: UIViewController {
     private func mapDataToScores() {
         var score = ScoreDisplay(officialDate: Date(), gameDate: Date(), awayTeamName: "", awayTeamRecord: "", homeTeamName: "", homeTeamRecord: "", awayTeamScore: 0, homeTeamScore: 0, inning: 0, inningOrdinal: "0", inningHalf: "Top", gameState: "", scheduledInnings: 0)
         for date in dates {
-            dateFormatter.dateFormat = "yyyy-MM-dd"
+            dateFormatter.dateFormat = officialDateFormat
             score.officialDate = dateFormatter.date(from: date.date)!
             currentDate = score.officialDate
             for game in date.games {
-                dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
+                dateFormatter.dateFormat = gameDateFormat
                 score.gameDate = dateFormatter.date(from: game.gameDate)!
                 score.awayTeamName = game.teams.away.team.teamName
                 score.awayTeamScore = game.linescore.teams.away.runs
@@ -75,7 +75,30 @@ class ScoreboardController: UIViewController {
                 scores.append(score)
             }
         }
+        addTestCases()
         filteredScores.append(contentsOf: scores.sorted(by: {$0.gameDate < $1.gameDate}))
+    }
+    
+    private func addTestCases() {
+        //Using this function to show different game state cases
+        let officialDateFormatter = DateFormatter()
+        dateFormatter.dateFormat = officialDateFormat
+        let officialDate = officialDateFormatter.date(from: "2018-09-19") ?? currentDate
+        let gameDateFormatter = DateFormatter()
+        gameDateFormatter.dateFormat = gameDateFormat
+        let gameDate = gameDateFormatter.date(from: "2018-09-20T17:10:00Z")!
+        let awayTeam = "Nationals"
+        let homeTeam = "Marlins"
+        let awayTeamRecord = "75-77"
+        let homeTeamRecord = "61-92"
+        let scheduledInnings = 9
+        let cases = [
+        ScoreDisplay(officialDate: officialDate, gameDate: gameDate, awayTeamName: awayTeam, awayTeamRecord: awayTeamRecord, homeTeamName: homeTeam, homeTeamRecord: homeTeamRecord, awayTeamScore: 5, homeTeamScore: 2, inning: 7, inningOrdinal: "7th", inningHalf: "Top", gameState: "In_Progress", scheduledInnings: scheduledInnings),
+        ScoreDisplay(officialDate: officialDate, gameDate: gameDate, awayTeamName: awayTeam, awayTeamRecord: awayTeamRecord, homeTeamName: homeTeam, homeTeamRecord: homeTeamRecord, awayTeamScore: 0, homeTeamScore: 0, inning: 0, inningOrdinal: "", inningHalf: "", gameState: "Not_Started", scheduledInnings: scheduledInnings),
+        ScoreDisplay(officialDate: officialDate, gameDate: gameDate, awayTeamName: awayTeam, awayTeamRecord: awayTeamRecord, homeTeamName: homeTeam, homeTeamRecord: homeTeamRecord, awayTeamScore: 1, homeTeamScore: 0, inning: 10, inningOrdinal: "10th", inningHalf: "Bottom", gameState: "Final", scheduledInnings: scheduledInnings),
+        ScoreDisplay(officialDate: officialDate, gameDate: gameDate, awayTeamName: awayTeam, awayTeamRecord: awayTeamRecord, homeTeamName: homeTeam, homeTeamRecord: homeTeamRecord, awayTeamScore: 2, homeTeamScore: 4, inning: 7, inningOrdinal: "7th", inningHalf: "Bottom", gameState: "Final", scheduledInnings: scheduledInnings)
+            ]
+        scores.append(contentsOf: cases)
     }
 
     private func setUpViews() {
@@ -137,7 +160,7 @@ class ScoreboardController: UIViewController {
         datePicker.layer.cornerRadius = 18
         datePicker.clipsToBounds = true
         datePicker.addTarget(self, action: #selector(dateChanged(sender:)), for: .valueChanged)
-        #warning("optimize this")
+        #warning("fix so date picker looks correct on iPad and iPhone")
         datePicker.frame = CGRect(x: 0, y: dateNavigationBar.frame.maxY + 8, width: view.frame.width / 1.05, height: view.frame.height / 2.5)
         datePicker.center.x = dateNavigationBar.center.x
     }
