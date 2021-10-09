@@ -42,6 +42,9 @@
                                     </navigationItem>
                                 </items>
                             </navigationBar>
+                            <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="1" style="inline" translatesAutoresizingMaskIntoConstraints="NO" id="SKp-9B-XGz">
+                                <rect key="frame" x="20" y="150" width="374" height="380.5"/>
+                            </datePicker>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="8jN-Ke-E5m">
                                 <rect key="frame" x="0.0" y="142" width="414" height="671"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -184,6 +187,10 @@
                             <constraint firstItem="E0I-7I-WUe" firstAttribute="top" secondItem="oou-cw-qHQ" secondAttribute="bottom" constant="10" id="0QF-51-Ika"/>
                             <constraint firstItem="E0I-7I-WUe" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="2Np-92-4c7"/>
                             <constraint firstItem="oou-cw-qHQ" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="9T8-tJ-IAp"/>
+                            <constraint firstItem="SKp-9B-XGz" firstAttribute="top" secondItem="E0I-7I-WUe" secondAttribute="bottom" constant="8" id="EfY-EC-t0c"/>
+                            <constraint firstItem="SKp-9B-XGz" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="F7K-Xs-HHv"/>
+                            <constraint firstItem="SKp-9B-XGz" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="FPx-MK-GWs"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="SKp-9B-XGz" secondAttribute="trailing" constant="20" id="MCD-9V-pjO"/>
                             <constraint firstItem="oou-cw-qHQ" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="Rjp-ic-Knu"/>
                             <constraint firstItem="oou-cw-qHQ" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="XVf-qJ-7Yy"/>
                             <constraint firstItem="8jN-Ke-E5m" firstAttribute="top" secondItem="E0I-7I-WUe" secondAttribute="bottom" id="fq8-eo-0NX"/>
@@ -200,6 +207,7 @@
                         <outlet property="dateItemLeft" destination="5R2-kk-IA8" id="bHS-F0-yl3"/>
                         <outlet property="dateItemRight" destination="mSH-eC-yGr" id="pd2-w7-Wze"/>
                         <outlet property="dateNavigationBar" destination="E0I-7I-WUe" id="oyN-fu-bJ6"/>
+                        <outlet property="datePicker" destination="SKp-9B-XGz" id="FAc-tN-Ame"/>
                         <outlet property="logoNavigationBar" destination="oou-cw-qHQ" id="L82-ST-BUL"/>
                         <outlet property="scoreboardTable" destination="8jN-Ke-E5m" id="3br-Wd-Rmh"/>
                         <outlet property="tabBar" destination="anQ-ev-mVM" id="tjH-9T-Ecv"/>

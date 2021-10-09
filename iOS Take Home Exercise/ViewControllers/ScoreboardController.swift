@@ -17,7 +17,7 @@ class ScoreboardController: UIViewController {
     @IBOutlet weak var dateItemRight: UIBarButtonItem!
     @IBOutlet weak var scoreboardTable: UITableView!
     @IBOutlet weak var tabBar: UITabBar!
-    private let datePicker : UIDatePicker = UIDatePicker()
+    @IBOutlet weak var datePicker: UIDatePicker!
     public var currentDate: Date = Date()
     public var dates: [GameDate] = []
     public var scores: [ScoreDisplay] = []
@@ -142,25 +142,21 @@ class ScoreboardController: UIViewController {
             image = UIImage(systemName: "chevron.right")!
         }
         item.image = image
-        
         item.tintColor = Colors.separatorColor
     }
     
     private func configureDatePicker() {
-        self.view.addSubview(datePicker)
+        view.bringSubviewToFront(datePicker)
         datePicker.date = currentDate
         datePicker.isHidden = true
         datePicker.datePickerMode = .date
         datePicker.preferredDatePickerStyle = .inline
+        datePicker.overrideUserInterfaceStyle = .dark
         datePicker.backgroundColor = Colors.textColor
         datePicker.tintColor = Colors.separatorColor
         datePicker.layer.cornerRadius = 18
         datePicker.clipsToBounds = true
         datePicker.addTarget(self, action: #selector(dateChanged(sender:)), for: .valueChanged)
-        #warning("fix so date picker looks correct on iPad and iPhone")
-        let size = self.view.frame.size
-        datePicker.frame = CGRect(x: 0, y: dateNavigationBar.frame.maxY + 8, width: size.width - 40, height: size.height - 550)
-        datePicker.center.x = dateNavigationBar.center.x
     }
     
     private func configureScoreboardTable() {
@@ -203,6 +199,7 @@ class ScoreboardController: UIViewController {
     }
     
     @objc func handleDatePicker() {
+        print("date picker hidden", datePicker.isHidden)
         if datePicker.isHidden {
             datePicker.isHidden = false
         } else {
@@ -249,4 +246,3 @@ extension ScoreboardController: UITableViewDelegate, UITableViewDataSource {
         return cell
     }
 }
-

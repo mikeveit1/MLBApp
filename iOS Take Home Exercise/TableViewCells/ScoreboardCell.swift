@@ -26,7 +26,6 @@ class ScoreboardCell: UITableViewCell {
     @IBOutlet weak var noScheduledGamesLabel: UILabel!
     private var allLabels: [UILabel] = []
     
-    
     override func awakeFromNib() {
         super.awakeFromNib()
         self.backgroundColor = Colors.backgroundColor
