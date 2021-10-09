@@ -23,7 +23,6 @@ class ScoreboardController: UIViewController {
     public var dates: [GameDate] = []
     public var scores: [ScoreDisplay] = []
     public var filteredScores: [ScoreDisplay] = []
-    private var hasScores: Bool = true
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
@@ -74,7 +73,6 @@ class ScoreboardController: UIViewController {
             }
         }
         filteredScores.append(contentsOf: scores)
-        hasScores = filteredScores.count > 0
     }
 
     private func setUpViews() {
@@ -86,10 +84,6 @@ class ScoreboardController: UIViewController {
     
     private func configureView() {
         view.backgroundColor = Colors.backgroundColor
-    }
-    
-    private func configureDateFormatter() {
-        // dateFormatter.dateFormat = "EEEE MMMM d"
     }
     
     private func configureLogoNavigationBar() {
@@ -171,7 +165,7 @@ class ScoreboardController: UIViewController {
         scoreboardTable.reloadData()
     }
     
-    @objc func datePressed() {
+    @objc func handleDatePicker() {
         if datePicker.isHidden {
             datePicker.isHidden = false
         } else {
@@ -184,7 +178,7 @@ class ScoreboardController: UIViewController {
     }
     
     @IBAction func dateNavigationBarPressed(_ sender: Any) {
-        datePressed()
+        handleDatePicker()
     }
     
     @IBAction func dateItemLeftPressed(_ sender: Any) {
@@ -198,6 +192,7 @@ class ScoreboardController: UIViewController {
 
 extension ScoreboardController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        #warning("should i put his condition in a variable? doesnt work when i try")
         if filteredScores.count > 0 {
             return filteredScores.count
         } else {
@@ -209,7 +204,9 @@ extension ScoreboardController: UITableViewDelegate, UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: "scoreboardCell") as! ScoreboardCell
         if filteredScores.count > 0 {
             cell.setData(score: filteredScores[indexPath.row])
+            scoreboardTable.separatorStyle  = .singleLine
         } else {
+            scoreboardTable.separatorStyle  = .none
             cell.handleNoScheduledGames(hideLabels: true)
         }
         return cell
