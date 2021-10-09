@@ -206,7 +206,6 @@ class ScoreboardController: UIViewController {
     }
     
     @objc func handleDatePicker() {
-        print("date picker hidden", datePicker.isHidden)
         if datePicker.isHidden {
             datePicker.isHidden = false
         } else {
