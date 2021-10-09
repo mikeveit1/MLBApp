@@ -82,6 +82,7 @@ class ScoreboardController: UIViewController {
         configureLogoNavigationBar()
         configureScoreboardTable()
         configureTabBar()
+        configureGestureRecognizers()
     }
     
     private func configureView() {
@@ -135,9 +136,8 @@ class ScoreboardController: UIViewController {
         datePicker.layer.cornerRadius = 18
         datePicker.clipsToBounds = true
         datePicker.addTarget(self, action: #selector(dateChanged(sender:)), for: .valueChanged)
-        let pickerSize : CGSize = datePicker.sizeThatFits(CGSize.zero)
         #warning("optimize this")
-        datePicker.frame = CGRect(x: 0, y: dateNavigationBar.frame.maxY + 20, width: pickerSize.width, height: pickerSize.height)
+        datePicker.frame = CGRect(x: 0, y: dateNavigationBar.frame.maxY + 8, width: view.frame.width / 1.05, height: view.frame.height / 2.5)
         datePicker.center.x = dateNavigationBar.center.x
     }
     
@@ -154,6 +154,17 @@ class ScoreboardController: UIViewController {
         tabBar.selectedItem = tabBar.items?.first
         tabBar.barTintColor = Colors.backgroundColor
         tabBar.tintColor = Colors.mlbBlue
+    }
+    
+    private func configureGestureRecognizers() {
+        let swipeRight = UISwipeGestureRecognizer(target: self, action: #selector(dateItemLeftPressed(_:)))
+        swipeRight.direction = .right
+        self.view.addGestureRecognizer(swipeRight)
+        let swipeLeft = UISwipeGestureRecognizer(target: self, action: #selector(dateItemRightPressed(_:)))
+        swipeLeft.direction = .left
+        self.view.addGestureRecognizer(swipeLeft)
+        let closePicker = UITapGestureRecognizer(target: self, action: #selector(hideDatePicker))
+        self.view.addGestureRecognizer(closePicker)
     }
     
     private func incrementDate(increment: Int, date: Date?) {
@@ -173,6 +184,10 @@ class ScoreboardController: UIViewController {
         } else {
             datePicker.isHidden = true
         }
+    }
+    
+    @objc func hideDatePicker() {
+        datePicker.isHidden = true
     }
     
     @objc func dateChanged(sender: UIDatePicker) {
