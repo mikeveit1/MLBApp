@@ -22,7 +22,8 @@ class ScoreboardController: UIViewController {
     public var currentDate: Date = Date()
     public var dates: [GameDate] = []
     public var scores: [ScoreDisplay] = []
-    private var totalGames: Int = 0
+    public var filteredScores: [ScoreDisplay] = []
+    private var hasScores: Bool = true
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
@@ -54,11 +55,11 @@ class ScoreboardController: UIViewController {
     }
     
     private func mapDataToScores() {
-        var score = ScoreDisplay(awayTeamName: "", awayTeamRecord: "", homeTeamName: "", homeTeamRecord: "", awayTeamScore: 0, homeTeamScore: 0, inning: 0, gameState: "", scheduledInnings: 0)
+        var score = ScoreDisplay(gameDate: Date(), awayTeamName: "", awayTeamRecord: "", homeTeamName: "", homeTeamRecord: "", awayTeamScore: 0, homeTeamScore: 0, inning: 0, gameState: "", scheduledInnings: 0)
         for date in dates {
             dateFormatter.dateFormat = "yyyy-MM-dd"
-            currentDate = dateFormatter.date(from: date.date)!
-            totalGames = date.totalGames
+            score.gameDate = dateFormatter.date(from: date.date)!
+            currentDate = score.gameDate
             for game in date.games {
                 score.awayTeamName = game.teams.away.team.teamName
                 score.awayTeamScore = game.linescore.teams.away.runs
@@ -72,6 +73,8 @@ class ScoreboardController: UIViewController {
                 scores.append(score)
             }
         }
+        filteredScores.append(contentsOf: scores)
+        hasScores = filteredScores.count > 0
     }
 
     private func setUpViews() {
@@ -102,10 +105,6 @@ class ScoreboardController: UIViewController {
     private func configureDateNavigationBar() {
         #warning("make month and day bold")
         dateFormatter.dateFormat = "EEEE MMMM d"
-       // dateFormatter.dateFormat = "mm-dd-yyyy"
-       // let formattedDate = dateFormatter.string(from: currentDate)
-        //dateFormatter.dateFormat = "EEEE MMM d"
-        //let formattedDate2 = dateFormatter.string(from: formattedDate!)
         dateNavigationBar.topItem?.title = dateFormatter.string(from: currentDate)
         dateNavigationBar.isTranslucent = false
         dateNavigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor : Colors.textColor]
@@ -151,8 +150,7 @@ class ScoreboardController: UIViewController {
         scoreboardTable.dataSource = self
         scoreboardTable.backgroundColor = Colors.backgroundColor
         scoreboardTable.separatorColor = Colors.separatorColor
-        #warning("make this automatic dimension")
-        scoreboardTable.rowHeight = 181
+        scoreboardTable.rowHeight = UITableView.automaticDimension
     }
     
     private func configureTabBar() {
@@ -160,6 +158,17 @@ class ScoreboardController: UIViewController {
         tabBar.selectedItem = tabBar.items?.first
         tabBar.barTintColor = Colors.backgroundColor
         tabBar.tintColor = Colors.mlbBlue
+    }
+    
+    private func incrementDate(increment: Int, date: Date?) {
+        if date == nil {
+            currentDate = Calendar.current.date(byAdding: .day, value: increment, to: currentDate)!
+        } else {
+            currentDate = date!
+        }
+        configureDateNavigationBar()
+        filteredScores = scores.filter({$0.gameDate == currentDate})
+        scoreboardTable.reloadData()
     }
     
     @objc func datePressed() {
@@ -171,9 +180,7 @@ class ScoreboardController: UIViewController {
     }
     
     @objc func dateChanged(sender: UIDatePicker) {
-        currentDate = sender.date
-        configureDateNavigationBar()
-        scoreboardTable.reloadData()
+        incrementDate(increment: 0, date: sender.date)
     }
     
     @IBAction func dateNavigationBarPressed(_ sender: Any) {
@@ -181,24 +188,30 @@ class ScoreboardController: UIViewController {
     }
     
     @IBAction func dateItemLeftPressed(_ sender: Any) {
-        print("left item pressed")
-#warning("this will go to the previous date and refresh table")
+        incrementDate(increment: -1, date: nil)
     }
     
     @IBAction func dateItemRightPressed(_ sender: Any) {
-        print("right item pressed")
-#warning("this will go to the next date and refresh table")
+        incrementDate(increment: 1, date: nil)
     }
 }
 
 extension ScoreboardController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return totalGames
+        if filteredScores.count > 0 {
+            return filteredScores.count
+        } else {
+            return 1
+        }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "scoreboardCell") as! ScoreboardCell
-        cell.setData(score: scores[indexPath.row])
+        if filteredScores.count > 0 {
+            cell.setData(score: filteredScores[indexPath.row])
+        } else {
+            cell.handleNoScheduledGames(hideLabels: true)
+        }
         return cell
     }
 }

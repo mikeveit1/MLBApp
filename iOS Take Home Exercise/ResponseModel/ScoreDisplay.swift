@@ -9,6 +9,7 @@
 import Foundation
 
 struct ScoreDisplay  {
+    var gameDate: Date
     var awayTeamName: String
     var awayTeamRecord: String
     var homeTeamName: String

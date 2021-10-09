@@ -10,12 +10,10 @@ import Foundation
 
 struct GameDate: Codable {
     var date: String
-    var totalGames: Int
     var games: [Game]
     
-    init(date: String, totalGames: Int, games: [Game]) {
+    init(date: String, games: [Game]) {
         self.date = date
-        self.totalGames = totalGames
         self.games = games
     } 
 }
