@@ -28,6 +28,7 @@ class ScoreboardController: UIViewController {
         super.viewWillAppear(true)
         getData()
         mapDataToScores()
+        configureDateNavigationBar()
     }
     
     override func viewDidLoad() {
@@ -55,6 +56,8 @@ class ScoreboardController: UIViewController {
     private func mapDataToScores() {
         var score = ScoreDisplay(awayTeamName: "", awayTeamRecord: "", homeTeamName: "", homeTeamRecord: "", awayTeamScore: 0, homeTeamScore: 0, inning: 0, gameState: "", scheduledInnings: 0)
         for date in dates {
+            dateFormatter.dateFormat = "yyyy-MM-dd"
+            currentDate = dateFormatter.date(from: date.date)!
             totalGames = date.totalGames
             for game in date.games {
                 score.awayTeamName = game.teams.away.team.teamName
@@ -74,7 +77,6 @@ class ScoreboardController: UIViewController {
     private func setUpViews() {
         configureView()
         configureLogoNavigationBar()
-        configureDateNavigationBar()
         configureScoreboardTable()
         configureTabBar()
     }
@@ -100,6 +102,10 @@ class ScoreboardController: UIViewController {
     private func configureDateNavigationBar() {
         #warning("make month and day bold")
         dateFormatter.dateFormat = "EEEE MMMM d"
+       // dateFormatter.dateFormat = "mm-dd-yyyy"
+       // let formattedDate = dateFormatter.string(from: currentDate)
+        //dateFormatter.dateFormat = "EEEE MMM d"
+        //let formattedDate2 = dateFormatter.string(from: formattedDate!)
         dateNavigationBar.topItem?.title = dateFormatter.string(from: currentDate)
         dateNavigationBar.isTranslucent = false
         dateNavigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor : Colors.textColor]
@@ -125,6 +131,7 @@ class ScoreboardController: UIViewController {
     
     private func configureDatePicker() {
         self.view.addSubview(datePicker)
+        datePicker.date = currentDate
         datePicker.isHidden = true
         datePicker.datePickerMode = .date
         datePicker.preferredDatePickerStyle = .inline

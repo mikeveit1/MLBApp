@@ -27,7 +27,7 @@ class ScoreboardCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        setUpViews()
+        self.backgroundColor = Colors.backgroundColor
     }
     
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -37,12 +37,12 @@ class ScoreboardCell: UITableViewCell {
     }
     
     public func setData(score: ScoreDisplay) {
-        configureLabel(label: awayNameLabel, data: score.awayTeamName)
-        configureLabel(label: awayRecordLabel, data: score.awayTeamRecord)
-        configureLabel(label: homeNameLabel, data: score.homeTeamName)
-        configureLabel(label: homeRecordLabel, data: score.homeTeamRecord)
-        configureLabel(label: awayScoreLabel, data: "\(score.awayTeamScore)")
-        configureLabel(label: homeScoreLabel, data: "\(score.homeTeamScore)")
+        configureLabel(label: awayNameLabel, color: Colors.textColor, data: score.awayTeamName)
+        configureLabel(label: awayRecordLabel, color: Colors.textColor, data: score.awayTeamRecord)
+        configureLabel(label: homeNameLabel, color: Colors.textColor, data: score.homeTeamName)
+        configureLabel(label: homeRecordLabel, color: Colors.textColor, data: score.homeTeamRecord)
+        configureLabel(label: awayScoreLabel, color: Colors.textColor, data: "\(score.awayTeamScore)")
+        configureLabel(label: homeScoreLabel, color: Colors.textColor, data: "\(score.homeTeamScore)")
         var status = String()
         if score.gameState == "Final" {
             status = score.gameState
@@ -52,64 +52,11 @@ class ScoreboardCell: UITableViewCell {
         } else {
             status = "\(score.inning)"
         }
-        configureLabel(label: inningLabel, data: status)
+        configureLabel(label: inningLabel, color: Colors.mlbBlue, data: status)
     }
     
-    private func setUpViews() {
-        configureView()
-        configureGameStackView()
-    }
-    
-    private func configureView() {
-        self.backgroundColor = Colors.backgroundColor
-    }
-    
-    private func configureGameStackView() {
-        configureTeamStackView()
-        configureScoreStackView()
-        configureInningStackView()
-    }
-    
-    private func configureTeamStackView() {
-        
-        configureHomeNameLabel()
-        configureHomeRecordLabel()
-    }
-    
-    private func configureLabel(label: UILabel, data: String) {
-        label.textColor = Colors.textColor
+    private func configureLabel(label: UILabel, color: UIColor, data: String) {
+        label.textColor = color
         label.text = data
-    }
-    
-    private func configureAwayRecordLabel(record: String) {
-        awayRecordLabel.textColor = Colors.textColor
-        awayRecordLabel.text = record
-    }
-    
-    private func configureHomeNameLabel() {
-        
-    }
-    
-    private func configureHomeRecordLabel() {
-        
-    }
-    
-    private func configureScoreStackView() {
-        let labels = [awayScoreLabel, homeScoreLabel]
-        for label in labels {
-            configureScoreLabel(label: label!)
-        }
-    }
-    
-    private func configureScoreLabel(label: UILabel) {
-        
-    }
-    
-    private func configureInningStackView() {
-        configureInningLabel()
-    }
-    
-    private func configureInningLabel() {
-    
     }
 }
