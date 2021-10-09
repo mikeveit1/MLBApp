@@ -40,7 +40,7 @@ class ScoreboardCell: UITableViewCell {
     
     public func handleNoScheduledGames(hideLabels: Bool) {
         noScheduledGamesLabel.isHidden = !hideLabels
-        configureLabel(label: noScheduledGamesLabel, color: Colors.textColor, data: "No Scheduled Games")
+        configureLabel(label: noScheduledGamesLabel, color: Colors.textColor, font: Fonts.mediumFont, data: "No Scheduled Games")
         for label in allLabels.filter({$0 != noScheduledGamesLabel }) {
             label.isHidden = hideLabels
         }
@@ -48,12 +48,12 @@ class ScoreboardCell: UITableViewCell {
     
     public func setData(score: ScoreDisplay) {
         handleNoScheduledGames(hideLabels: false)
-        configureLabel(label: awayNameLabel, color: Colors.textColor, data: score.awayTeamName)
-        configureLabel(label: awayRecordLabel, color: Colors.textColor, data: score.awayTeamRecord)
-        configureLabel(label: homeNameLabel, color: Colors.textColor, data: score.homeTeamName)
-        configureLabel(label: homeRecordLabel, color: Colors.textColor, data: score.homeTeamRecord)
-        configureLabel(label: awayScoreLabel, color: Colors.textColor, data: "\(score.awayTeamScore)")
-        configureLabel(label: homeScoreLabel, color: Colors.textColor, data: "\(score.homeTeamScore)")
+        configureLabel(label: awayNameLabel, color: Colors.textColor, font: Fonts.mediumFont, data: score.awayTeamName)
+        configureLabel(label: awayRecordLabel, color: Colors.separatorColor, font: Fonts.smallFont, data: score.awayTeamRecord)
+        configureLabel(label: homeNameLabel, color: Colors.textColor, font: Fonts.mediumFont, data: score.homeTeamName)
+        configureLabel(label: homeRecordLabel, color: Colors.separatorColor, font: Fonts.smallFont, data: score.homeTeamRecord)
+        configureLabel(label: awayScoreLabel, color: Colors.textColor, font: Fonts.largeFont, data: "\(score.awayTeamScore)")
+        configureLabel(label: homeScoreLabel, color: Colors.textColor, font: Fonts.largeFont, data: "\(score.homeTeamScore)")
         var status = String()
         if score.gameState == "Final" {
             status = score.gameState
@@ -63,12 +63,13 @@ class ScoreboardCell: UITableViewCell {
         } else {
             status = "\(score.inning)"
         }
-        configureLabel(label: inningLabel, color: Colors.mlbBlue, data: status)
+        configureLabel(label: inningLabel, color: Colors.mlbBlue, font: Fonts.mediumFontBold, data: status)
     }
     
-    private func configureLabel(label: UILabel, color: UIColor, data: String) {
+    private func configureLabel(label: UILabel, color: UIColor, font: UIFont, data: String) {
         allLabels.append(label)
         label.textColor = color
+        label.font = font
         label.text = data
     }
 }

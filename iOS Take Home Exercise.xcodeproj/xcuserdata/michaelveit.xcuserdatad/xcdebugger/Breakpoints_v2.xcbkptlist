@@ -14,10 +14,10 @@
             filePath = "iOS Take Home Exercise/TableViewCells/ScoreboardCell.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "51"
-            endingLineNumber = "51"
-            landmarkName = "setData(score:)"
-            landmarkType = "7">
+            startingLineNumber = "48"
+            endingLineNumber = "48"
+            landmarkName = "ScoreboardCell"
+            landmarkType = "3">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -78,9 +78,9 @@
             filePath = "iOS Take Home Exercise/TableViewCells/ScoreboardCell.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "69"
-            endingLineNumber = "69"
-            landmarkName = "configureLabel(label:color:data:)"
+            startingLineNumber = "66"
+            endingLineNumber = "66"
+            landmarkName = "setData(score:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
