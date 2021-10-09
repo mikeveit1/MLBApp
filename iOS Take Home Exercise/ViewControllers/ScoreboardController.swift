@@ -122,7 +122,6 @@ class ScoreboardController: UIViewController {
     }
     
     private func configureDateNavigationBar() {
-        #warning("make month and day bold")
         let dateLabel = UILabel()
         dateLabel.textColor = Colors.textColor
         dateFormatter.dateFormat = dayOfWeekFormat
