@@ -31,12 +31,6 @@ class ScoreboardCell: UITableViewCell {
         self.backgroundColor = Colors.backgroundColor
     }
     
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-        
-        // Configure the view for the selected state
-    }
-    
     public func handleNoScheduledGames(hideLabels: Bool) {
         noScheduledGamesLabel.isHidden = !hideLabels
         configureLabel(label: noScheduledGamesLabel, color: Colors.textColor, font: Fonts.mediumFont, data: "No Scheduled Games")

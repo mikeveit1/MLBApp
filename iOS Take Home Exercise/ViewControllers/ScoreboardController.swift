@@ -80,7 +80,6 @@ class ScoreboardController: UIViewController {
     }
     
     private func addTestCases() {
-        #warning("am i keeping this?")
         //Using this function to show different game state cases
         let gameDateFormatter = DateFormatter()
         gameDateFormatter.dateFormat = gameDateFormat
@@ -238,6 +237,10 @@ extension ScoreboardController: UITableViewDelegate, UITableViewDataSource {
         } else {
             return 1
         }
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        print(indexPath.row )
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
