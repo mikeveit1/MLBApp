@@ -36,8 +36,23 @@ class ScoreboardCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
-    public func setData(scores: ScoreDisplay) {
-        configureAwayNameLabel(name: scores.awayTeamName)
+    public func setData(score: ScoreDisplay) {
+        configureLabel(label: awayNameLabel, data: score.awayTeamName)
+        configureLabel(label: awayRecordLabel, data: score.awayTeamRecord)
+        configureLabel(label: homeNameLabel, data: score.homeTeamName)
+        configureLabel(label: homeRecordLabel, data: score.homeTeamRecord)
+        configureLabel(label: awayScoreLabel, data: "\(score.awayTeamScore)")
+        configureLabel(label: homeScoreLabel, data: "\(score.homeTeamScore)")
+        var status = String()
+        if score.gameState == "Final" {
+            status = score.gameState
+            if score.inning != score.scheduledInnings {
+                status = "F/\(score.inning)"
+            }
+        } else {
+            status = "\(score.inning)"
+        }
+        configureLabel(label: inningLabel, data: status)
     }
     
     private func setUpViews() {
@@ -57,18 +72,18 @@ class ScoreboardCell: UITableViewCell {
     
     private func configureTeamStackView() {
         
-        configureAwayRecordLabel()
         configureHomeNameLabel()
         configureHomeRecordLabel()
     }
     
-    private func configureAwayNameLabel(name: String) {
-        awayNameLabel.textColor = Colors.textColor
-        awayNameLabel.text = name
+    private func configureLabel(label: UILabel, data: String) {
+        label.textColor = Colors.textColor
+        label.text = data
     }
     
-    private func configureAwayRecordLabel() {
-        
+    private func configureAwayRecordLabel(record: String) {
+        awayRecordLabel.textColor = Colors.textColor
+        awayRecordLabel.text = record
     }
     
     private func configureHomeNameLabel() {

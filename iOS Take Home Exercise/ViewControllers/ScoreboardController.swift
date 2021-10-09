@@ -24,11 +24,15 @@ class ScoreboardController: UIViewController {
     public var scores: [ScoreDisplay] = []
     private var totalGames: Int = 0
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        getData()
+        mapDataToScores()
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setUpViews()
-        getData()
-        mapDataToScores()
     }
     
     private func getData() {
@@ -49,47 +53,24 @@ class ScoreboardController: UIViewController {
     }
     
     private func mapDataToScores() {
+        var score = ScoreDisplay(awayTeamName: "", awayTeamRecord: "", homeTeamName: "", homeTeamRecord: "", awayTeamScore: 0, homeTeamScore: 0, inning: 0, gameState: "", scheduledInnings: 0)
         for date in dates {
-            var score = ScoreDisplay(awayTeamName: "", awayTeamRecord: "", homeTeamName: "", homeTeamRecord: "", awayTeamScore: 0, homeTeamScore: 0, inning: 0, gameState: "", scheduledInnings: 0)
-           /* for game in date.games {
-                for status in game.status {
-                    score.gameState = status.detailedState
-                }
-                for team in game.teams {
-                    for away in team.awayTeam {
-                        for record in away.leagueRecords {
-                            score.awayTeamRecord = "\(record.wins)-\(record.losses)"
-                        }
-                        for team in away.team {
-                            score.awayTeamName = team.teamName
-                        }
-                    }
-                    for home in team.homeTeam {
-                        for record in home.leagueRecords {
-                            score.homeTeamRecord = "\(record.wins)-\(record.losses)"
-                        }
-                        for team in home.team {
-                            score.awayTeamName = team.teamName
-                        }
-                    }
-                }
-                for linescore in game.linescore {
-                    score.inning =  linescore.currentInning
-                    score.scheduledInnings = linescore.scheduledInnings
-                    for team in linescore.linescoreTeams {
-                        for home in team.home {
-                            score.homeTeamScore = home.runs
-                        }
-                        for away in team.away {
-                            score.awayTeamScore = away.runs
-                        }
-                    }
-                }
+            totalGames = date.totalGames
+            for game in date.games {
+                score.awayTeamName = game.teams.away.team.teamName
+                score.awayTeamScore = game.linescore.teams.away.runs
+                score.awayTeamRecord = "\(game.teams.away.leagueRecord.wins) - \(game.teams.away.leagueRecord.losses)"
+                score.homeTeamName = game.teams.home.team.teamName
+                score.homeTeamScore = game.linescore.teams.home.runs
+                score.homeTeamRecord = "\(game.teams.home.leagueRecord.wins) - \(game.teams.home.leagueRecord.losses)"
+                score.inning = game.linescore.currentInning
+                score.gameState = game.status.detailedState
+                score.scheduledInnings = game.linescore.scheduledInnings
+                scores.append(score)
             }
-            scores.append(score) */
         }
     }
-    
+
     private func setUpViews() {
         configureView()
         configureLogoNavigationBar()
@@ -163,7 +144,8 @@ class ScoreboardController: UIViewController {
         scoreboardTable.dataSource = self
         scoreboardTable.backgroundColor = Colors.backgroundColor
         scoreboardTable.separatorColor = Colors.separatorColor
-        scoreboardTable.rowHeight = UITableView.automaticDimension
+        #warning("make this automatic dimension")
+        scoreboardTable.rowHeight = 181
     }
     
     private func configureTabBar() {
@@ -209,7 +191,7 @@ extension ScoreboardController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "scoreboardCell") as! ScoreboardCell
-        cell.setData(scores: scores[indexPath.row])
+        cell.setData(score: scores[indexPath.row])
         return cell
     }
 }
