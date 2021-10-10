@@ -160,7 +160,7 @@ class ScoreboardController: UIViewController {
         datePicker.overrideUserInterfaceStyle = .dark
         datePicker.backgroundColor = Colors.textColor
         datePicker.tintColor = Colors.separatorColor
-        datePicker.layer.cornerRadius = 18
+        datePicker.layer.cornerRadius = cornerRadiusValue
         datePicker.clipsToBounds = true
         datePicker.addTarget(self, action: #selector(dateChanged(sender:)), for: .valueChanged)
     }
@@ -241,7 +241,14 @@ extension ScoreboardController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        print(indexPath.row )
+        if let viewController = storyboard?.instantiateViewController(identifier: "DetailedGameViewController") as? DetailedGameViewController {
+            viewController.score = scores[indexPath.row]
+            self.show(viewController, sender: self)
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
+        
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

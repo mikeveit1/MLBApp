@@ -211,11 +211,38 @@
                         <outlet property="logoNavigationBar" destination="oou-cw-qHQ" id="L82-ST-BUL"/>
                         <outlet property="scoreboardTable" destination="8jN-Ke-E5m" id="3br-Wd-Rmh"/>
                         <outlet property="tabBar" destination="anQ-ev-mVM" id="tjH-9T-Ecv"/>
+                        <segue destination="KhV-yS-E1K" kind="show" identifier="detailSegue" id="ndz-8O-nro"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-104.34782608695653" y="0.6696428571428571"/>
+        </scene>
+        <!--Detailed Game View Controller-->
+        <scene sceneID="CFu-PR-h4t">
+            <objects>
+                <viewController storyboardIdentifier="DetailedGameViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="KhV-yS-E1K" customClass="DetailedGameViewController" customModule="iOS_Take_Home_Exercise" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="dc5-kI-mDU">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="87k-ZG-RvC" customClass="DetailedGameView" customModule="iOS_Take_Home_Exercise" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="808"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            </view>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="0gE-Zr-G3l"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="fFH-dX-vkW"/>
+                    <connections>
+                        <outlet property="detailedGameView" destination="87k-ZG-RvC" id="gMJ-PM-L2d"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="5Km-83-Ccm" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="874" y="-7"/>
         </scene>
     </scenes>
     <resources>
