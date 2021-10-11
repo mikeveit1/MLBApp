@@ -15,11 +15,11 @@ class DetailedGameViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super .viewWillAppear(animated)
+        view.backgroundColor = Colors.backgroundColor
         detailedGameView.setData(score: score)
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-       // detailedGameView.setData(score: score)
     }
 }

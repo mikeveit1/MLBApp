@@ -45,8 +45,8 @@ class ScoreboardCell: UITableViewCell {
         configureLabel(label: awayRecordLabel, color: Colors.separatorColor, font: Fonts.smallFont, data: score.awayTeamRecord)
         configureLabel(label: homeNameLabel, color: Colors.textColor, font: Fonts.mediumFont, data: score.homeTeamName)
         configureLabel(label: homeRecordLabel, color: Colors.separatorColor, font: Fonts.smallFont, data: score.homeTeamRecord)
-        configureLabel(label: awayScoreLabel, color: Colors.textColor, font: Fonts.largeFont, data: "\(score.awayTeamScore)")
-        configureLabel(label: homeScoreLabel, color: Colors.textColor, font: Fonts.largeFont, data: "\(score.homeTeamScore)")
+        configureLabel(label: awayScoreLabel, color: Colors.textColor, font: Fonts.largeFont, data: "\(score.awayTeamRuns)")
+        configureLabel(label: homeScoreLabel, color: Colors.textColor, font: Fonts.largeFont, data: "\(score.homeTeamRuns)")
         configureLabel(label: inningLabel, color: Colors.mlbBlue, font: Fonts.mediumFont, data: getGameStatus(score: score))
         }
     
@@ -55,33 +55,5 @@ class ScoreboardCell: UITableViewCell {
         label.textColor = color
         label.font = font
         label.text = data
-    }
-    
-    private enum GameStatus: String {
-        case notStarted = "Not_Started"
-        case inProgress = "In_Progress"
-        case completed = "Final"
-    }
-    
-    private func getGameStatus(score: ScoreDisplay) -> String {
-        var status = String()
-        if let state = GameStatus.init(rawValue: score.gameState) {
-            switch state {
-            case .completed:
-                status = score.gameState
-                if score.inning != score.scheduledInnings {
-                    status = "F/\(score.inning)"
-                }
-                break
-            case .inProgress:
-                status = "\(score.inningHalf) \(score.inningOrdinal)"
-                break
-            case .notStarted:
-                dateFormatter.dateFormat = timeFormat
-                status = dateFormatter.string(from: score.gameDate)
-                break
-            }
-        }
-        return status
     }
 }

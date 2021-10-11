@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19162" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19162" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="zhn-my-Ehy">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
@@ -10,22 +10,43 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
+        <!--Navigation Controller-->
+        <scene sceneID="Bf7-wW-KJq">
+            <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="R9b-Nh-N1O" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <navigationController id="zhn-my-Ehy" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" shadowImage=" " id="eVh-94-iFg">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="barTintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <textAttributes key="titleTextAttributes">
+                            <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        </textAttributes>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="P4b-Kg-UCc"/>
+                    </connections>
+                </navigationController>
+            </objects>
+            <point key="canvasLocation" x="-1087" y="1"/>
+        </scene>
         <!--Scoreboard Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
                 <viewController storyboardIdentifier="ScoreboardController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="BYZ-38-t0r" customClass="ScoreboardController" customModule="iOS_Take_Home_Exercise" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="808"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <navigationBar contentMode="scaleToFill" shadowImage=" " translatesAutoresizingMaskIntoConstraints="NO" id="oou-cw-qHQ">
-                                <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
                                 <items>
                                     <navigationItem title="Title" id="eHI-Uz-qj9"/>
                                 </items>
                             </navigationBar>
                             <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="E0I-7I-WUe">
-                                <rect key="frame" x="0.0" y="98" width="414" height="44"/>
+                                <rect key="frame" x="0.0" y="54" width="414" height="44"/>
                                 <gestureRecognizers/>
                                 <items>
                                     <navigationItem title="Title" id="URr-a1-241">
@@ -43,10 +64,10 @@
                                 </items>
                             </navigationBar>
                             <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="1" style="inline" translatesAutoresizingMaskIntoConstraints="NO" id="SKp-9B-XGz">
-                                <rect key="frame" x="20" y="150" width="374" height="380.5"/>
+                                <rect key="frame" x="20" y="106" width="374" height="380.5"/>
                             </datePicker>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="8jN-Ke-E5m">
-                                <rect key="frame" x="0.0" y="142" width="414" height="671"/>
+                                <rect key="frame" x="0.0" y="98" width="414" height="627"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 <prototypes>
@@ -171,7 +192,7 @@
                                 </connections>
                             </tableView>
                             <tabBar contentMode="scaleToFill" id="anQ-ev-mVM">
-                                <rect key="frame" x="0.0" y="813" width="414" height="49"/>
+                                <rect key="frame" x="0.0" y="725" width="414" height="49"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <items>
@@ -203,6 +224,7 @@
                             <constraint firstItem="oou-cw-qHQ" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="t2O-cZ-BgC"/>
                         </constraints>
                     </view>
+                    <navigationItem key="navigationItem" id="1aV-n9-Kqg"/>
                     <connections>
                         <outlet property="dateItemLeft" destination="5R2-kk-IA8" id="bHS-F0-yl3"/>
                         <outlet property="dateItemRight" destination="mSH-eC-yGr" id="pd2-w7-Wze"/>
@@ -223,26 +245,30 @@
             <objects>
                 <viewController storyboardIdentifier="DetailedGameViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="KhV-yS-E1K" customClass="DetailedGameViewController" customModule="iOS_Take_Home_Exercise" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="dc5-kI-mDU">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="808"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="87k-ZG-RvC" customClass="DetailedGameView" customModule="iOS_Take_Home_Exercise" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="808"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OWD-WA-aDN" customClass="DetailedGameView" customModule="iOS_Take_Home_Exercise" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="774"/>
                             </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="0gE-Zr-G3l"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="0gE-Zr-G3l" firstAttribute="trailing" secondItem="OWD-WA-aDN" secondAttribute="trailing" id="46d-Hu-kE7"/>
+                            <constraint firstItem="OWD-WA-aDN" firstAttribute="leading" secondItem="0gE-Zr-G3l" secondAttribute="leading" id="WZL-CI-QQN"/>
+                            <constraint firstItem="OWD-WA-aDN" firstAttribute="top" secondItem="0gE-Zr-G3l" secondAttribute="top" id="vE1-t2-wBr"/>
+                            <constraint firstItem="0gE-Zr-G3l" firstAttribute="bottom" secondItem="OWD-WA-aDN" secondAttribute="bottom" id="yvJ-IN-f2X"/>
+                        </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="fFH-dX-vkW"/>
+                    <navigationItem key="navigationItem" id="KC6-fi-rMJ"/>
                     <connections>
-                        <outlet property="detailedGameView" destination="87k-ZG-RvC" id="gMJ-PM-L2d"/>
+                        <outlet property="detailedGameView" destination="OWD-WA-aDN" id="Dbo-CH-ba9"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5Km-83-Ccm" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="874" y="-7"/>
+            <point key="canvasLocation" x="873.91304347826099" y="-7.3660714285714279"/>
         </scene>
     </scenes>
     <resources>

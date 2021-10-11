@@ -10,8 +10,10 @@ import Foundation
 
 struct Team: Codable {
     var teamName: String
+    var abbreviation: String
     
-    init(teamName: String) {
+    init(teamName: String, abbreviation: String) {
         self.teamName = teamName
+        self.abbreviation = abbreviation
     }
 }

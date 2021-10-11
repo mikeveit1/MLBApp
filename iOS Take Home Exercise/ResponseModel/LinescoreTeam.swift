@@ -10,8 +10,12 @@ import Foundation
 
 struct LinescoreTeam: Codable {
     var runs: Int
+    var hits: Int
+    var errors: Int
     
-    init(runs: Int) {
+    init(runs: Int, hits: Int, errors: Int) {
         self.runs = runs
+        self.hits = hits
+        self.errors = errors
     }
 }

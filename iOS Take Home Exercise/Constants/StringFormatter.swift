@@ -15,3 +15,4 @@ internal func formatAttributedString(string: String, range: String, attributes: 
     attributedString.addAttributes(attributes, range: stringToFormat)
     return attributedString
 }
+

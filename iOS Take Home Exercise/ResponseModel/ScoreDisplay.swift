@@ -12,14 +12,24 @@ struct ScoreDisplay  {
     var officialDate: Date
     var gameDate: Date
     var awayTeamName: String
+    var awayTeamAbbreviation: String
     var awayTeamRecord: String
     var homeTeamName: String
+    var homeTeamAbbreviation: String
     var homeTeamRecord: String
-    var awayTeamScore: Int
-    var homeTeamScore: Int
+    var awayTeamRuns: Int
+    var awayTeamHits: Int
+    var awayTeamErrors: Int
+    var homeTeamRuns: Int
+    var homeTeamHits: Int
+    var homeTeamErrors: Int
     var inning: Int
     var inningOrdinal: String
     var inningHalf: String
     var gameState: String
     var scheduledInnings: Int
+    var venueName: String
+    var venueCity: String
+    var venueState: String
+    var innings: [Inning]
 }

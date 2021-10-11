@@ -13,11 +13,13 @@ struct Game: Codable {
     var status: Status
     var teams: Teams
     var linescore: Linescore
+    var venue: Venue
     
-    init(gameDate: String, status: Status, teams: Teams, linescore: Linescore) {
+    init(gameDate: String, status: Status, teams: Teams, linescore: Linescore, venue: Venue) {
         self.gameDate = gameDate
         self.status = status
         self.teams = teams
         self.linescore = linescore
+        self.venue = venue
     }
 }

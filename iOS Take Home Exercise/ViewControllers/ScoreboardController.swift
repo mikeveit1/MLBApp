@@ -53,7 +53,7 @@ class ScoreboardController: UIViewController {
     }
     
     private func mapDataToScores() {
-        var score = ScoreDisplay(officialDate: Date(), gameDate: Date(), awayTeamName: "", awayTeamRecord: "", homeTeamName: "", homeTeamRecord: "", awayTeamScore: 0, homeTeamScore: 0, inning: 0, inningOrdinal: "0", inningHalf: "Top", gameState: "", scheduledInnings: 0)
+        var score = ScoreDisplay(officialDate: Date(), gameDate: Date(), awayTeamName: "", awayTeamAbbreviation: "", awayTeamRecord: "", homeTeamName: "", homeTeamAbbreviation: "", homeTeamRecord: "", awayTeamRuns: 0, awayTeamHits: 0, awayTeamErrors: 0, homeTeamRuns: 0, homeTeamHits: 0, homeTeamErrors: 0, inning: 0, inningOrdinal: "0", inningHalf: "Top", gameState: "", scheduledInnings: 0, venueName: "", venueCity: "", venueState: "", innings: [Inning(num: 0, home: InningTeam(runs: 0), away: InningTeam(runs: 0))])
         for date in dates {
             dateFormatter.dateFormat = officialDateFormat
             score.officialDate = dateFormatter.date(from: date.date)!
@@ -62,16 +62,26 @@ class ScoreboardController: UIViewController {
                 dateFormatter.dateFormat = gameDateFormat
                 score.gameDate = dateFormatter.date(from: game.gameDate)!
                 score.awayTeamName = game.teams.away.team.teamName
-                score.awayTeamScore = game.linescore.teams.away.runs
+                score.awayTeamAbbreviation = game.teams.away.team.abbreviation
+                score.awayTeamRuns = game.linescore.teams.away.runs
+                score.awayTeamHits = game.linescore.teams.away.hits
+                score.awayTeamErrors = game.linescore.teams.away.errors
                 score.awayTeamRecord = "\(game.teams.away.leagueRecord.wins) - \(game.teams.away.leagueRecord.losses)"
                 score.homeTeamName = game.teams.home.team.teamName
-                score.homeTeamScore = game.linescore.teams.home.runs
+                score.homeTeamAbbreviation = game.teams.home.team.abbreviation
+                score.homeTeamRuns = game.linescore.teams.home.runs
+                score.homeTeamHits = game.linescore.teams.home.hits
+                score.homeTeamErrors = game.linescore.teams.home.errors
                 score.homeTeamRecord = "\(game.teams.home.leagueRecord.wins) - \(game.teams.home.leagueRecord.losses)"
                 score.inning = game.linescore.currentInning
                 score.inningOrdinal = game.linescore.currentInningOrdinal
                 score.inningHalf = game.linescore.inningHalf
                 score.gameState = game.status.detailedState
                 score.scheduledInnings = game.linescore.scheduledInnings
+                score.venueName = game.venue.name
+                score.venueCity = game.venue.location.city
+                score.venueState = game.venue.location.state
+                score.innings = game.linescore.innings
                 scores.append(score)
             }
         }
@@ -85,15 +95,21 @@ class ScoreboardController: UIViewController {
         gameDateFormatter.dateFormat = gameDateFormat
         let gameDate = gameDateFormatter.date(from: "2018-09-20T23:10:00Z")!
         let awayTeam = "Nationals"
+        let awayTeamAbbreviation = "WAS"
         let homeTeam = "Marlins"
+        let homeTeamAbbreviation = "MIA"
+        let venueName = "LoanDepot Park"
+        let venueCity = "Miami"
+        let venueState = "Florida"
         let awayTeamRecord = "75-77"
         let homeTeamRecord = "61-92"
         let scheduledInnings = 9
+        let innings = [Inning(num: 1, home: InningTeam(runs: 0), away: InningTeam(runs: 0))]
         let cases = [
-            ScoreDisplay(officialDate: currentDate, gameDate: gameDate, awayTeamName: awayTeam, awayTeamRecord: awayTeamRecord, homeTeamName: homeTeam, homeTeamRecord: homeTeamRecord, awayTeamScore: 1, homeTeamScore: 0, inning: 10, inningOrdinal: "10th", inningHalf: "Bottom", gameState: "Final", scheduledInnings: scheduledInnings),
-            ScoreDisplay(officialDate: currentDate, gameDate: gameDate, awayTeamName: awayTeam, awayTeamRecord: awayTeamRecord, homeTeamName: homeTeam, homeTeamRecord: homeTeamRecord, awayTeamScore: 5, homeTeamScore: 2, inning: 7, inningOrdinal: "7th", inningHalf: "Top", gameState: "In_Progress", scheduledInnings: scheduledInnings),
-            ScoreDisplay(officialDate: currentDate, gameDate: gameDate, awayTeamName: awayTeam, awayTeamRecord: awayTeamRecord, homeTeamName: homeTeam, homeTeamRecord: homeTeamRecord, awayTeamScore: 2, homeTeamScore: 4, inning: 7, inningOrdinal: "7th", inningHalf: "Bottom", gameState: "Final", scheduledInnings: scheduledInnings),
-            ScoreDisplay(officialDate: currentDate, gameDate: gameDate, awayTeamName: awayTeam, awayTeamRecord: awayTeamRecord, homeTeamName: homeTeam, homeTeamRecord: homeTeamRecord, awayTeamScore: 0, homeTeamScore: 0, inning: 0, inningOrdinal: "", inningHalf: "", gameState: "Not_Started", scheduledInnings: scheduledInnings),
+            ScoreDisplay(officialDate: currentDate, gameDate: gameDate, awayTeamName: awayTeam, awayTeamAbbreviation: awayTeamAbbreviation, awayTeamRecord: awayTeamRecord, homeTeamName: homeTeam, homeTeamAbbreviation: homeTeamAbbreviation, homeTeamRecord: homeTeamRecord, awayTeamRuns: 1, awayTeamHits: 1, awayTeamErrors: 0, homeTeamRuns: 0, homeTeamHits: 0, homeTeamErrors: 0, inning: 10, inningOrdinal: "10th", inningHalf: "Bottom", gameState: "Final", scheduledInnings: scheduledInnings, venueName: venueName, venueCity: venueCity, venueState: venueState, innings: innings),
+            ScoreDisplay(officialDate: currentDate, gameDate: gameDate, awayTeamName: awayTeam, awayTeamAbbreviation: awayTeamAbbreviation, awayTeamRecord: awayTeamRecord, homeTeamName: homeTeam, homeTeamAbbreviation: homeTeamAbbreviation, homeTeamRecord: homeTeamRecord, awayTeamRuns: 5,awayTeamHits: 1, awayTeamErrors: 0, homeTeamRuns: 0, homeTeamHits: 0, homeTeamErrors: 0, inning: 7, inningOrdinal: "7th", inningHalf: "Top", gameState: "In_Progress", scheduledInnings: scheduledInnings, venueName: venueName, venueCity: venueCity, venueState: venueState, innings: innings),
+            ScoreDisplay(officialDate: currentDate, gameDate: gameDate, awayTeamName: awayTeam,  awayTeamAbbreviation: awayTeamAbbreviation, awayTeamRecord: awayTeamRecord, homeTeamName: homeTeam, homeTeamAbbreviation: homeTeamAbbreviation, homeTeamRecord: homeTeamRecord, awayTeamRuns: 2, awayTeamHits: 1, awayTeamErrors: 0, homeTeamRuns: 0, homeTeamHits: 0, homeTeamErrors: 0, inning: 7, inningOrdinal: "7th", inningHalf: "Bottom", gameState: "Final", scheduledInnings: scheduledInnings, venueName: venueName, venueCity: venueCity, venueState: venueState, innings: innings),
+            ScoreDisplay(officialDate: currentDate, gameDate: gameDate, awayTeamName: awayTeam, awayTeamAbbreviation: awayTeamAbbreviation, awayTeamRecord: awayTeamRecord, homeTeamName: homeTeam, homeTeamAbbreviation: homeTeamAbbreviation, homeTeamRecord: homeTeamRecord, awayTeamRuns: 0, awayTeamHits: 1, awayTeamErrors: 0, homeTeamRuns: 0, homeTeamHits: 0, homeTeamErrors: 0, inning: 0, inningOrdinal: "", inningHalf: "", gameState: "Not_Started", scheduledInnings: scheduledInnings, venueName: venueName, venueCity: venueCity, venueState: venueState, innings: innings)
         ]
         scores.append(contentsOf: cases)
     }
@@ -111,10 +127,9 @@ class ScoreboardController: UIViewController {
     }
     
     private func configureLogoNavigationBar() {
-        let logo: UIImage = UIImage(named: "mlblogo")!
         let logoView = UIImageView(frame: CGRect(x: 0, y: 0, width: 40, height: 40))
         logoView.contentMode = .scaleAspectFit
-        logoView.image = logo
+        logoView.image = UIImage(named: "mlblogo")!
         logoNavigationBar.topItem?.titleView = logoView
         logoNavigationBar.isTranslucent = false
         logoNavigationBar.barTintColor = Colors.backgroundColor
@@ -243,7 +258,7 @@ extension ScoreboardController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if let viewController = storyboard?.instantiateViewController(identifier: "DetailedGameViewController") as? DetailedGameViewController {
             viewController.score = scores[indexPath.row]
-            self.show(viewController, sender: self)
+            navigationController?.pushViewController(viewController, animated: true)
         }
     }
     

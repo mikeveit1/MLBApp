@@ -14,12 +14,14 @@ struct Linescore: Codable {
     var inningHalf: String
     var teams: LinescoreTeams
     var scheduledInnings: Int
+    var innings: [Inning]
     
-    init(currentInning: Int, currentInningOrdinal: String, inningHalf: String, teams: LinescoreTeams, scheduledInnings: Int) {
+    init(currentInning: Int, currentInningOrdinal: String, inningHalf: String, teams: LinescoreTeams, scheduledInnings: Int, innings: [Inning]) {
         self.currentInning = currentInning
         self.currentInningOrdinal = currentInningOrdinal
         self.inningHalf = inningHalf
         self.teams = teams
         self.scheduledInnings = scheduledInnings
+        self.innings = innings
     }
 }
