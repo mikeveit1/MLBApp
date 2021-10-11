@@ -21,8 +21,8 @@ class ScoreboardCell: UITableViewCell {
     @IBOutlet weak var scoreStackView: UIStackView!
     @IBOutlet weak var awayScoreLabel: UILabel!
     @IBOutlet weak var homeScoreLabel: UILabel!
-    @IBOutlet weak var inningStackView: UIStackView!
-    @IBOutlet weak var inningLabel: UILabel!
+    @IBOutlet weak var statusStackView: UIStackView!
+    @IBOutlet weak var statusLabel: UILabel!
     @IBOutlet weak var noScheduledGamesLabel: UILabel!
     private var allLabels: [UILabel] = []
     
@@ -47,7 +47,7 @@ class ScoreboardCell: UITableViewCell {
         configureLabel(label: homeRecordLabel, color: Colors.separatorColor, font: Fonts.smallFont, data: score.homeTeamRecord)
         configureLabel(label: awayScoreLabel, color: Colors.textColor, font: Fonts.largeFont, data: "\(score.awayTeamRuns)")
         configureLabel(label: homeScoreLabel, color: Colors.textColor, font: Fonts.largeFont, data: "\(score.homeTeamRuns)")
-        configureLabel(label: inningLabel, color: Colors.mlbBlue, font: Fonts.mediumFont, data: getGameStatus(score: score))
+        configureLabel(label: statusLabel, color: Colors.mlbBlue, font: Fonts.mediumFont, data: getGameStatus(score: score))
         }
     
     private func configureLabel(label: UILabel, color: UIColor, font: UIFont, data: String) {

@@ -13,7 +13,6 @@
         <!--Navigation Controller-->
         <scene sceneID="Bf7-wW-KJq">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="R9b-Nh-N1O" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <navigationController id="zhn-my-Ehy" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" shadowImage=" " id="eVh-94-iFg">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
@@ -28,6 +27,7 @@
                         <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="P4b-Kg-UCc"/>
                     </connections>
                 </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="R9b-Nh-N1O" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-1087" y="1"/>
         </scene>
@@ -178,10 +178,10 @@
                                             <outlet property="homeRecordLabel" destination="Pw0-7D-o5J" id="elf-9o-9Ns"/>
                                             <outlet property="homeScoreLabel" destination="cH1-vh-h67" id="plt-Tm-PZy"/>
                                             <outlet property="homeStackView" destination="alX-g7-jjE" id="LUN-6U-WVC"/>
-                                            <outlet property="inningLabel" destination="hI0-7w-GR1" id="f9T-l0-1z2"/>
-                                            <outlet property="inningStackView" destination="5Ma-wt-ucd" id="inz-ek-PbO"/>
                                             <outlet property="noScheduledGamesLabel" destination="2NN-ib-BMn" id="Zxs-C7-BMm"/>
                                             <outlet property="scoreStackView" destination="TvR-wu-GzF" id="wpu-WN-Gy1"/>
+                                            <outlet property="statusLabel" destination="hI0-7w-GR1" id="hVi-DD-X95"/>
+                                            <outlet property="statusStackView" destination="5Ma-wt-ucd" id="5B0-o7-0ZV"/>
                                             <outlet property="teamStackView" destination="akv-nT-OPl" id="7zF-pq-jsl"/>
                                         </connections>
                                     </tableViewCell>
