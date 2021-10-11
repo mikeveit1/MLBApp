@@ -41,6 +41,7 @@
 		AD7D405C27139F310073D3BC /* InningTeam.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD7D405B27139F310073D3BC /* InningTeam.swift */; };
 		ADB55C0F2710B9D200D0A0DC /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADB55C0E2710B9D200D0A0DC /* Colors.swift */; };
 		ADCBB43B2713BE1A00B66012 /* Fonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADCBB43A2713BE1A00B66012 /* Fonts.swift */; };
+		ADCBB43D2713D22000B66012 /* ArrayHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADCBB43C2713D22000B66012 /* ArrayHelper.swift */; };
 		ADF96E0227138002001AFE38 /* DetailedGameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADF96E0127138002001AFE38 /* DetailedGameViewController.swift */; };
 /* End PBXBuildFile section */
 
@@ -103,6 +104,7 @@
 		AD7D405B27139F310073D3BC /* InningTeam.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InningTeam.swift; sourceTree = "<group>"; };
 		ADB55C0E2710B9D200D0A0DC /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
 		ADCBB43A2713BE1A00B66012 /* Fonts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fonts.swift; sourceTree = "<group>"; };
+		ADCBB43C2713D22000B66012 /* ArrayHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArrayHelper.swift; sourceTree = "<group>"; };
 		ADF96E0127138002001AFE38 /* DetailedGameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailedGameViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -279,6 +281,7 @@
 				AD0187DC27136FAD00E62EE3 /* Globals.swift */,
 				AD7D4053271390B00073D3BC /* GameStatus.swift */,
 				ADCBB43A2713BE1A00B66012 /* Fonts.swift */,
+				ADCBB43C2713D22000B66012 /* ArrayHelper.swift */,
 			);
 			path = Constants;
 			sourceTree = "<group>";
@@ -441,6 +444,7 @@
 				AD16478A2710E09E004731E1 /* Teams.swift in Sources */,
 				AD0187DD27136FAD00E62EE3 /* Globals.swift in Sources */,
 				AD1647A527111301004731E1 /* GameTeam.swift in Sources */,
+				ADCBB43D2713D22000B66012 /* ArrayHelper.swift in Sources */,
 				AD1647962710E2E7004731E1 /* LinescoreTeam.swift in Sources */,
 				AD7D4054271390B00073D3BC /* GameStatus.swift in Sources */,
 				AD7D405C27139F310073D3BC /* InningTeam.swift in Sources */,

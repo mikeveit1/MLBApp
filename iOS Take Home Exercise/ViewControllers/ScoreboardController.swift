@@ -53,13 +53,14 @@ class ScoreboardController: UIViewController {
     }
     
     private func mapDataToScores() {
-        var score = ScoreDisplay(officialDate: Date(), gameDate: Date(), awayTeamName: "", awayTeamAbbreviation: "", awayTeamRecord: "", homeTeamName: "", homeTeamAbbreviation: "", homeTeamRecord: "", awayTeamRuns: 0, awayTeamHits: 0, awayTeamErrors: 0, homeTeamRuns: 0, homeTeamHits: 0, homeTeamErrors: 0, inning: 0, inningOrdinal: "0", inningHalf: "Top", gameState: "", scheduledInnings: 0, venueName: "", venueCity: "", venueState: "", innings: [Inning(num: 0, home: InningTeam(runs: 0), away: InningTeam(runs: 0))])
+        var score = ScoreDisplay(officialDate: Date(), gamePk: 0, gameDate: Date(), awayTeamName: "", awayTeamAbbreviation: "", awayTeamRecord: "", homeTeamName: "", homeTeamAbbreviation: "", homeTeamRecord: "", awayTeamRuns: 0, awayTeamHits: 0, awayTeamErrors: 0, homeTeamRuns: 0, homeTeamHits: 0, homeTeamErrors: 0, inning: 0, inningOrdinal: "0", inningHalf: "Top", gameState: "", scheduledInnings: 0, venueName: "", venueCity: "", venueState: "", innings: [Inning(num: 0, home: InningTeam(runs: 0), away: InningTeam(runs: 0))])
         for date in dates {
             dateFormatter.dateFormat = officialDateFormat
             score.officialDate = dateFormatter.date(from: date.date)!
             currentDate = score.officialDate
             for game in date.games {
                 dateFormatter.dateFormat = gameDateFormat
+                score.gamePk = game.gamePk
                 score.gameDate = dateFormatter.date(from: game.gameDate)!
                 score.awayTeamName = game.teams.away.team.teamName
                 score.awayTeamAbbreviation = game.teams.away.team.abbreviation
@@ -86,7 +87,9 @@ class ScoreboardController: UIViewController {
             }
         }
         addTestCases()
-        filteredScores.append(contentsOf: scores.sorted(by: {$0.gameDate < $1.gameDate}))
+        if !filteredScores.contains(where: {$0.gamePk == score.gamePk }) {
+            filteredScores.append(contentsOf: scores.sorted(by: {$0.gameDate < $1.gameDate}))
+        }
     }
     
     private func addTestCases() {
@@ -104,12 +107,16 @@ class ScoreboardController: UIViewController {
         let awayTeamRecord = "75-77"
         let homeTeamRecord = "61-92"
         let scheduledInnings = 9
-        let innings = [Inning(num: 1, home: InningTeam(runs: 0), away: InningTeam(runs: 0))]
+        var innings = [Inning]()
+        for number in 1...9 {
+            let inning = Inning(num: number, home: InningTeam(runs: 0), away: InningTeam(runs: 0))
+            innings.append(inning)
+        }
         let cases = [
-            ScoreDisplay(officialDate: currentDate, gameDate: gameDate, awayTeamName: awayTeam, awayTeamAbbreviation: awayTeamAbbreviation, awayTeamRecord: awayTeamRecord, homeTeamName: homeTeam, homeTeamAbbreviation: homeTeamAbbreviation, homeTeamRecord: homeTeamRecord, awayTeamRuns: 1, awayTeamHits: 1, awayTeamErrors: 0, homeTeamRuns: 0, homeTeamHits: 0, homeTeamErrors: 0, inning: 10, inningOrdinal: "10th", inningHalf: "Bottom", gameState: "Final", scheduledInnings: scheduledInnings, venueName: venueName, venueCity: venueCity, venueState: venueState, innings: innings),
-            ScoreDisplay(officialDate: currentDate, gameDate: gameDate, awayTeamName: awayTeam, awayTeamAbbreviation: awayTeamAbbreviation, awayTeamRecord: awayTeamRecord, homeTeamName: homeTeam, homeTeamAbbreviation: homeTeamAbbreviation, homeTeamRecord: homeTeamRecord, awayTeamRuns: 5,awayTeamHits: 1, awayTeamErrors: 0, homeTeamRuns: 0, homeTeamHits: 0, homeTeamErrors: 0, inning: 7, inningOrdinal: "7th", inningHalf: "Top", gameState: "In_Progress", scheduledInnings: scheduledInnings, venueName: venueName, venueCity: venueCity, venueState: venueState, innings: innings),
-            ScoreDisplay(officialDate: currentDate, gameDate: gameDate, awayTeamName: awayTeam,  awayTeamAbbreviation: awayTeamAbbreviation, awayTeamRecord: awayTeamRecord, homeTeamName: homeTeam, homeTeamAbbreviation: homeTeamAbbreviation, homeTeamRecord: homeTeamRecord, awayTeamRuns: 2, awayTeamHits: 1, awayTeamErrors: 0, homeTeamRuns: 0, homeTeamHits: 0, homeTeamErrors: 0, inning: 7, inningOrdinal: "7th", inningHalf: "Bottom", gameState: "Final", scheduledInnings: scheduledInnings, venueName: venueName, venueCity: venueCity, venueState: venueState, innings: innings),
-            ScoreDisplay(officialDate: currentDate, gameDate: gameDate, awayTeamName: awayTeam, awayTeamAbbreviation: awayTeamAbbreviation, awayTeamRecord: awayTeamRecord, homeTeamName: homeTeam, homeTeamAbbreviation: homeTeamAbbreviation, homeTeamRecord: homeTeamRecord, awayTeamRuns: 0, awayTeamHits: 1, awayTeamErrors: 0, homeTeamRuns: 0, homeTeamHits: 0, homeTeamErrors: 0, inning: 0, inningOrdinal: "", inningHalf: "", gameState: "Not_Started", scheduledInnings: scheduledInnings, venueName: venueName, venueCity: venueCity, venueState: venueState, innings: innings)
+            ScoreDisplay(officialDate: currentDate, gamePk: 0, gameDate: gameDate, awayTeamName: awayTeam, awayTeamAbbreviation: awayTeamAbbreviation, awayTeamRecord: awayTeamRecord, homeTeamName: homeTeam, homeTeamAbbreviation: homeTeamAbbreviation, homeTeamRecord: homeTeamRecord, awayTeamRuns: 1, awayTeamHits: 1, awayTeamErrors: 0, homeTeamRuns: 0, homeTeamHits: 0, homeTeamErrors: 0, inning: 10, inningOrdinal: "10th", inningHalf: "Bottom", gameState: "Final", scheduledInnings: scheduledInnings, venueName: venueName, venueCity: venueCity, venueState: venueState, innings: innings),
+            ScoreDisplay(officialDate: currentDate, gamePk: 1, gameDate: gameDate, awayTeamName: awayTeam, awayTeamAbbreviation: awayTeamAbbreviation, awayTeamRecord: awayTeamRecord, homeTeamName: homeTeam, homeTeamAbbreviation: homeTeamAbbreviation, homeTeamRecord: homeTeamRecord, awayTeamRuns: 5,awayTeamHits: 1, awayTeamErrors: 0, homeTeamRuns: 0, homeTeamHits: 0, homeTeamErrors: 0, inning: 7, inningOrdinal: "7th", inningHalf: "Top", gameState: "In_Progress", scheduledInnings: scheduledInnings, venueName: venueName, venueCity: venueCity, venueState: venueState, innings: innings),
+            ScoreDisplay(officialDate: currentDate, gamePk: 2, gameDate: gameDate, awayTeamName: awayTeam,  awayTeamAbbreviation: awayTeamAbbreviation, awayTeamRecord: awayTeamRecord, homeTeamName: homeTeam, homeTeamAbbreviation: homeTeamAbbreviation, homeTeamRecord: homeTeamRecord, awayTeamRuns: 2, awayTeamHits: 1, awayTeamErrors: 0, homeTeamRuns: 0, homeTeamHits: 0, homeTeamErrors: 0, inning: 7, inningOrdinal: "7th", inningHalf: "Bottom", gameState: "Final", scheduledInnings: scheduledInnings, venueName: venueName, venueCity: venueCity, venueState: venueState, innings: innings),
+            ScoreDisplay(officialDate: currentDate, gamePk: 3, gameDate: gameDate, awayTeamName: awayTeam, awayTeamAbbreviation: awayTeamAbbreviation, awayTeamRecord: awayTeamRecord, homeTeamName: homeTeam, homeTeamAbbreviation: homeTeamAbbreviation, homeTeamRecord: homeTeamRecord, awayTeamRuns: 0, awayTeamHits: 0, awayTeamErrors: 0, homeTeamRuns: 0, homeTeamHits: 0, homeTeamErrors: 0, inning: 0, inningOrdinal: "", inningHalf: "", gameState: "Not_Started", scheduledInnings: scheduledInnings, venueName: venueName, venueCity: venueCity, venueState: venueState, innings: innings)
         ]
         scores.append(contentsOf: cases)
     }

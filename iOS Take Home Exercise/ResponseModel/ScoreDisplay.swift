@@ -8,8 +8,9 @@
 
 import Foundation
 
-struct ScoreDisplay  {
+struct ScoreDisplay {
     var officialDate: Date
+    var gamePk: Int
     var gameDate: Date
     var awayTeamName: String
     var awayTeamAbbreviation: String

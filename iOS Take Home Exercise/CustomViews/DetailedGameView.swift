@@ -27,8 +27,9 @@ class DetailedGameView: UIView {
     }
     
     public func setData(score: ScoreDisplay) {
-        configureLabel(label: teamsLabel, color: Colors.textColor, font: Fonts.mediumFontBold, data: "\(score.awayTeamName) at \(score.homeTeamName)")
-        configureLabel(label: statusLabel, color: Colors.textColor, font: Fonts.mediumFont, data: getGameStatus(score: score))
+        dateFormatter.dateFormat = monthDayYearFormat
+        configureLabel(label: teamsLabel, color: Colors.textColor, font: Fonts.mediumLargeFontBold, data: "\(score.awayTeamName) at \(score.homeTeamName)")
+        configureLabel(label: dateLabel, color: Colors.textColor, font: Fonts.mediumFont, data: dateFormatter.string(from: score.officialDate))
         configureLabel(label: venueLabel, color: Colors.textColor, font: Fonts.mediumFont, data: "\(score.venueName) - \(score.venueCity), \(score.venueState)")
         configureBoxScoreStackView(score: score)
     }
@@ -49,7 +50,9 @@ class DetailedGameView: UIView {
         mainStackView.topAnchor.constraint(equalTo: self.topAnchor).isActive = true
         mainStackView.addArrangedSubview(teamsLabel)
         mainStackView.addArrangedSubview(venueLabel)
-        mainStackView.addArrangedSubview(statusLabel)
+        mainStackView.addArrangedSubview(dateLabel)
+        mainStackView.addArrangedSubview(boxScoreLabel)
+        configureLabel(label: boxScoreLabel, color: Colors.textColor, font: Fonts.mediumFontBold, data: "Box Score:")
         mainStackView.addArrangedSubview(boxScoreStackView)
     }
     
@@ -71,7 +74,6 @@ class DetailedGameView: UIView {
         configureLabel(label: spacerLabel, color: Colors.backgroundColor, font: Fonts.mediumFont, data: " ")
         configureLabel(label: awayAbbreviationLabel, color: Colors.textColor, font: Fonts.mediumFont, data: score.awayTeamAbbreviation)
         configureLabel(label: homeAbbreviationLabel, color: Colors.textColor, font: Fonts.mediumFont, data: score.homeTeamAbbreviation)
-        teamStackView.leadingAnchor.constraint(equalTo: boxScoreStackView.leadingAnchor, constant: 20).isActive = true
     }
     
     private func configureInningsStackView(score: ScoreDisplay) {
@@ -82,6 +84,7 @@ class DetailedGameView: UIView {
             let currentInningStackView = UIStackView()
             currentInningStackView.axis = .vertical
             currentInningStackView.distribution = .fill
+            currentInningStackView.alignment = .center
             currentInningStackView.spacing = 10
             configureLabel(label: numLabel, color: Colors.textColor, font: Fonts.mediumFont, data: "\(inning.num)")
             configureLabel(label: awayRunsLabel, color: Colors.textColor, font: Fonts.mediumFont, data: "\(inning.away.runs ?? 0)")
@@ -100,7 +103,6 @@ class DetailedGameView: UIView {
         configureTotalHitsStackView(score: score)
         runsHitsErrorsStackView.addArrangedSubview(totalErrorsStackView)
         configureTotalErrorsStackView(score: score)
-        runsHitsErrorsStackView.trailingAnchor.constraint(equalTo: boxScoreStackView.trailingAnchor, constant: -20).isActive = true
     }
     
     private func configureTotalRunsStackView(score: ScoreDisplay) {
@@ -142,7 +144,7 @@ class DetailedGameView: UIView {
         view.axis = .vertical
         view.alignment = .center
         view.distribution = .equalSpacing
-        view.spacing = 10
+        view.spacing = 25
         return view
     }()
     
@@ -150,7 +152,11 @@ class DetailedGameView: UIView {
         return UILabel()
     }()
     
-    let statusLabel: UILabel = {
+    let dateLabel: UILabel = {
+        return UILabel()
+    }()
+    
+    let boxScoreLabel: UILabel = {
         return UILabel()
     }()
     
@@ -172,7 +178,7 @@ class DetailedGameView: UIView {
         let view = UIStackView()
         view.translatesAutoresizingMaskIntoConstraints = false
         view.axis = .vertical
-        view.alignment = .fill
+        view.alignment = .center
         view.distribution = .equalSpacing
         view.spacing = 0
         return view
@@ -194,7 +200,7 @@ class DetailedGameView: UIView {
         let view = UIStackView()
         view.translatesAutoresizingMaskIntoConstraints = false
         view.axis = .horizontal
-        view.alignment = .fill
+        view.alignment = .center
         view.distribution = .fill
         view.spacing = 10
         return view
@@ -204,7 +210,7 @@ class DetailedGameView: UIView {
         let view = UIStackView()
         view.translatesAutoresizingMaskIntoConstraints = false
         view.axis = .vertical
-        view.alignment = .fill
+        view.alignment = .center
         view.distribution = .fill
         view.spacing = 10
         return view
@@ -226,7 +232,7 @@ class DetailedGameView: UIView {
         let view = UIStackView()
         view.translatesAutoresizingMaskIntoConstraints = false
         view.axis = .vertical
-        view.alignment = .fill
+        view.alignment = .center
         view.distribution = .fill
         view.spacing = 10
         return view
@@ -248,7 +254,7 @@ class DetailedGameView: UIView {
         let view = UIStackView()
         view.translatesAutoresizingMaskIntoConstraints = false
         view.axis = .vertical
-        view.alignment = .fill
+        view.alignment = .center
         view.distribution = .fill
         view.spacing = 10
         return view
@@ -270,22 +276,9 @@ class DetailedGameView: UIView {
         let view = UIStackView()
         view.translatesAutoresizingMaskIntoConstraints = false
         view.axis = .horizontal
-        view.alignment = .fill
-        view.distribution = .fill
+        view.alignment = .center
+        view.distribution = .fillEqually
         view.spacing = 10
         return view
     }()
-    
-    //box score stack view - horizontal
-        //team stack view - vertical
-            //team names
-        //inning stack view - vertical
-            //score for that inning
-        //total runs stack view - vertical
-            //total runs for the game
-        //total hits stack view - vertical
-            //total hits for the game
-        //total errors stack view - vertical 
-            //total erros for the game
-    
 }
