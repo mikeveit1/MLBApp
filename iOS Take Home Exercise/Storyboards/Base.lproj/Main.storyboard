@@ -10,24 +10,6 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Navigation Controller-->
-        <scene sceneID="Bf7-wW-KJq">
-            <objects>
-                <navigationController id="zhn-my-Ehy" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" shadowImage=" " id="eVh-94-iFg">
-                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                        <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <color key="barTintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <textAttributes key="titleTextAttributes">
-                            <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        </textAttributes>
-                    </navigationBar>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="R9b-Nh-N1O" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-1087" y="1"/>
-        </scene>
         <!--Scoreboard Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
@@ -230,7 +212,7 @@
                         <outlet property="logoNavigationBar" destination="oou-cw-qHQ" id="L82-ST-BUL"/>
                         <outlet property="scoreboardTable" destination="8jN-Ke-E5m" id="3br-Wd-Rmh"/>
                         <outlet property="tabBar" destination="anQ-ev-mVM" id="tjH-9T-Ecv"/>
-                        <segue destination="KhV-yS-E1K" kind="show" identifier="detailSegue" id="ndz-8O-nro"/>
+                        <segue destination="KhV-yS-E1K" kind="showDetail" identifier="detailSegue" id="Hij-cb-0TV"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

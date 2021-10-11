@@ -21,7 +21,7 @@ class ScoreboardController: UIViewController {
     public var currentDate: Date = Date()
     public var dates: [GameDate] = []
     public var scores: [ScoreDisplay] = []
-    public var filteredScores: [ScoreDisplay] = []
+    public var sortedScores: [ScoreDisplay] = []
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
@@ -88,11 +88,7 @@ class ScoreboardController: UIViewController {
         }
         addTestCases()
         #warning("fix array duplicating when coming back from detail view")
-      //  for score in scores {
-         //   if !filteredScores.contains(where: {$0.gamePk == score.gamePk }) {
-                filteredScores.append(contentsOf: scores.sorted(by: {$0.gameDate < $1.gameDate}))
-         //   }
-       // }
+                sortedScores.append(contentsOf: scores.sorted(by: {$0.gameDate < $1.gameDate}))
     }
     
     private func addTestCases() {
@@ -226,7 +222,7 @@ class ScoreboardController: UIViewController {
             currentDate = date!
         }
         configureDateNavigationBar()
-        filteredScores = scores.filter({$0.officialDate == currentDate})
+        sortedScores = scores.filter({$0.officialDate == currentDate})
         scoreboardTable.reloadData()
     }
     
@@ -253,30 +249,35 @@ class ScoreboardController: UIViewController {
     @IBAction func dateItemRightPressed(_ sender: Any) {
         incrementDate(increment: 1, date: nil)
     }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "detailSegue" {
+            if let indexPath = self.scoreboardTable.indexPathForSelectedRow {
+                let controller = segue.destination as! DetailedGameViewController
+                controller.score = sortedScores[indexPath.row]
+            }
+        }
+    }
 }
 
 extension ScoreboardController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         #warning("should i put his condition in a variable? doesnt work when i try...maybe an enum?")
-        if filteredScores.count > 0 {
-            return filteredScores.count
+        if sortedScores.count > 0 {
+            return sortedScores.count
         } else {
             return 1
         }
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if let viewController = storyboard?.instantiateViewController(identifier: "DetailedGameViewController") as? DetailedGameViewController {
-            viewController.score = scores[indexPath.row]
-            self.show(viewController, sender: self)
-            //navigationController?.pushViewController(viewController, animated: true)
-        }
+        performSegue(withIdentifier: "detailSegue", sender: self)
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "scoreboardCell") as! ScoreboardCell
-        if filteredScores.count > 0 {
-            cell.setData(score: filteredScores[indexPath.row])
+        if sortedScores.count > 0 {
+            cell.setData(score: sortedScores[indexPath.row])
             scoreboardTable.separatorStyle  = .singleLine
         } else {
             scoreboardTable.separatorStyle  = .none
