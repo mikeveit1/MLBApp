@@ -48,7 +48,7 @@ class ScoreboardCell: UITableViewCell {
         configureLabel(label: awayScoreLabel, color: Colors.textColor, font: Fonts.largeFont, data: "\(score.awayTeamRuns)")
         configureLabel(label: homeScoreLabel, color: Colors.textColor, font: Fonts.largeFont, data: "\(score.homeTeamRuns)")
         configureLabel(label: statusLabel, color: Colors.mlbBlue, font: Fonts.mediumFont, data: getGameStatus(score: score))
-        }
+    }
     
     private func configureLabel(label: UILabel, color: UIColor, font: UIFont, data: String) {
         allLabels.append(label)
