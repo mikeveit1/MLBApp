@@ -11,3 +11,5 @@ import UIKit
 
 internal var cornerRadiusValue: CGFloat = 18
 internal var borderWidth: CGFloat = 1.0
+internal var backImage: UIImage = UIImage(systemName: "chevron.left")!
+internal var forwardImage: UIImage = UIImage(systemName: "chevron.right")!

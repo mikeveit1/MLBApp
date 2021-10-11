@@ -87,12 +87,12 @@ class ScoreboardController: UIViewController {
             }
         }
         addTestCases()
-        #warning("fix array duplicating")
-        for score in scores {
-            if !filteredScores.contains(where: {$0.gamePk == score.gamePk }) {
+        #warning("fix array duplicating when coming back from detail view")
+      //  for score in scores {
+         //   if !filteredScores.contains(where: {$0.gamePk == score.gamePk }) {
                 filteredScores.append(contentsOf: scores.sorted(by: {$0.gameDate < $1.gameDate}))
-            }
-        }
+         //   }
+       // }
     }
     
     private func addTestCases() {
@@ -168,9 +168,9 @@ class ScoreboardController: UIViewController {
     private func configureDateNavigationItems(item: UIBarButtonItem, left: Bool) {
         var image = UIImage()
         if left {
-            image = UIImage(systemName: "chevron.left")!
+            image = backImage
         } else {
-            image = UIImage(systemName: "chevron.right")!
+            image = forwardImage
         }
         item.image = image
         item.tintColor = Colors.separatorColor
@@ -268,7 +268,8 @@ extension ScoreboardController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if let viewController = storyboard?.instantiateViewController(identifier: "DetailedGameViewController") as? DetailedGameViewController {
             viewController.score = scores[indexPath.row]
-            navigationController?.pushViewController(viewController, animated: true)
+            self.show(viewController, sender: self)
+            //navigationController?.pushViewController(viewController, animated: true)
         }
     }
     
