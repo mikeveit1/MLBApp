@@ -211,10 +211,7 @@ class ScoreboardController: UIViewController {
         swipeLeft.direction = .left
         self.view.addGestureRecognizer(swipeLeft)
         let handlePicker = UITapGestureRecognizer(target: self, action: #selector(handleDatePicker))
-        #warning("come back to this")
-        let closePicker = UITapGestureRecognizer(target: self, action: #selector(hideDatePicker))
         dateNavigationBar.addGestureRecognizer(handlePicker)
-      //  scoreboardTable.addGestureRecognizer(closePicker)
     }
     
     private func incrementDate(increment: Int, date: Date?) {
@@ -234,10 +231,6 @@ class ScoreboardController: UIViewController {
         } else {
             datePicker.isHidden = true
         }
-    }
-    
-    @objc func hideDatePicker() {
-        datePicker.isHidden = true
     }
     
     @objc func dateChanged(sender: UIDatePicker) {

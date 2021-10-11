@@ -56,24 +56,30 @@ class DetailedGameView: UIView {
         mainStackView.addArrangedSubview(boxScoreLabel)
         configureLabel(label: boxScoreLabel, color: textColor, font: Fonts.mediumFontBold, data: "Box Score:")
         mainStackView.addArrangedSubview(boxScoreContainer)
+        mainStackView.addArrangedSubview(boxScoreStackView)
         configureBoxScoreContainer()
     }
     
     private func configureBoxScoreContainer() {
-        boxScoreContainer.backgroundColor = Colors.separatorColor
         boxScoreContainer.leadingAnchor.constraint(equalTo: mainStackView.leadingAnchor).isActive = true
         boxScoreContainer.trailingAnchor.constraint(equalTo: mainStackView.trailingAnchor).isActive = true
-        boxScoreContainer.addSubview(boxScoreStackView)
+      //  boxScoreContainer.addSubview(boxScoreStackView)
+        let label = UILabel()
+        label.text = "container"
+        label.textColor = textColor
+        boxScoreContainer.addSubview(label)
+        boxScoreContainer.backgroundColor = .black
     }
     
     private func configureBoxScoreStackView(score: ScoreDisplay) {
+        boxScoreStackView.backgroundColor = .clear
         boxScoreStackView.addArrangedSubview(teamStackView)
         configureTeamStackView(score: score)
         boxScoreStackView.addArrangedSubview(inningStackView)
         configureInningsStackView(score: score)
         boxScoreStackView.addArrangedSubview(runsHitsErrorsStackView)
         configureRunsHitsErrorsStackView(score: score)
-        boxScoreStackView.backgroundColor = Colors.separatorColor
+       // boxScoreStackView.backgroundColor = Colors.separatorColor
         boxScoreStackView.leadingAnchor.constraint(equalTo: boxScoreContainer.leadingAnchor, constant: 10).isActive = true
         boxScoreStackView.trailingAnchor.constraint(equalTo: boxScoreContainer.trailingAnchor, constant: -10).isActive = true
     }
@@ -126,7 +132,6 @@ class DetailedGameView: UIView {
         configureTotalHitsStackView(score: score)
         runsHitsErrorsStackView.addArrangedSubview(totalErrorsStackView)
         configureTotalErrorsStackView(score: score)
-        //runsHitsErrorsStackView.trailingAnchor.constraint(equalTo: boxScoreStackView.trailingAnchor, constant: -2).isActive = true
     }
     
     private func configureTotalRunsStackView(score: ScoreDisplay) {
@@ -188,9 +193,7 @@ class DetailedGameView: UIView {
     }()
     
     let boxScoreContainer: UIView = {
-        let view = UIView()
-        view.backgroundColor = Colors.separatorColor
-        return view
+        return UIView()
     }()
     
     let boxScoreStackView: UIStackView = {
