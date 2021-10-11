@@ -87,8 +87,11 @@ class ScoreboardController: UIViewController {
             }
         }
         addTestCases()
-        if !filteredScores.contains(where: {$0.gamePk == score.gamePk }) {
-            filteredScores.append(contentsOf: scores.sorted(by: {$0.gameDate < $1.gameDate}))
+        #warning("fix array duplicating")
+        for score in scores {
+            if !filteredScores.contains(where: {$0.gamePk == score.gamePk }) {
+                filteredScores.append(contentsOf: scores.sorted(by: {$0.gameDate < $1.gameDate}))
+            }
         }
     }
     
@@ -267,10 +270,6 @@ extension ScoreboardController: UITableViewDelegate, UITableViewDataSource {
             viewController.score = scores[indexPath.row]
             navigationController?.pushViewController(viewController, animated: true)
         }
-    }
-    
-    func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
-        
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
