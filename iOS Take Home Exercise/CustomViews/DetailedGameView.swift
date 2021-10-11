@@ -133,7 +133,8 @@ class DetailedGameView: UIView {
         configureLabel(label: runsLabel, color: labelTextColor, font: Fonts.mediumFont, data: "R")
         totalRunsStackView.addArrangedSubview(awayRunsLabel)
         totalRunsStackView.addArrangedSubview(homeRunsLabel)
-        formatRunsLabels(awayRuns: score.awayTeamRuns, homeRuns: score.homeTeamRuns, awayLabel: awayRunsLabel, homeLabel: homeRunsLabel)
+        configureLabel(label: awayRunsLabel, color: labelTextColor, font: Fonts.mediumFontBold, data: "\(score.awayTeamRuns)")
+        configureLabel(label: homeRunsLabel, color: labelTextColor, font: Fonts.mediumFontBold, data: "\(score.homeTeamRuns)")
     }
     
     private func configureTotalHitsStackView(score: ScoreDisplay) {
