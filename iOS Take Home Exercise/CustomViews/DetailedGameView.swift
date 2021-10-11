@@ -31,7 +31,7 @@ class DetailedGameView: UIView {
         configureLabel(label: teamsLabel, color: labelTextColor, font: Fonts.mediumLargeFontBold, data: "\(score.awayTeamName) at \(score.homeTeamName)")
         configureLabel(label: dateLabel, color: labelTextColor, font: Fonts.mediumFont, data: dateFormatter.string(from: score.officialDate))
         configureLabel(label: venueLabel, color: labelTextColor, font: Fonts.mediumFont, data: "\(score.venueName) - \(score.venueCity), \(score.venueState)")
-        configureBoxScoreStackView(score: score)
+        configureBoxScoreContainer(score: score)
     }
     
     private func setUpViews() {
@@ -54,13 +54,14 @@ class DetailedGameView: UIView {
         mainStackView.addArrangedSubview(boxScoreLabel)
         configureLabel(label: boxScoreLabel, color: labelTextColor, font: Fonts.mediumFontBold, data: "Box Score:")
         mainStackView.addArrangedSubview(boxScoreContainer)
-        configureBoxScoreContainer()
     }
     
-    private func configureBoxScoreContainer() {
+    private func configureBoxScoreContainer(score: ScoreDisplay) {
         boxScoreContainer.leadingAnchor.constraint(equalTo: mainStackView.leadingAnchor).isActive = true
         boxScoreContainer.trailingAnchor.constraint(equalTo: mainStackView.trailingAnchor).isActive = true
         boxScoreContainer.addSubview(boxScoreStackView)
+        boxScoreContainer.backgroundColor = Colors.separatorColor
+        configureBoxScoreStackView(score: score)
     }
     
     private func configureBoxScoreStackView(score: ScoreDisplay) {
@@ -71,9 +72,10 @@ class DetailedGameView: UIView {
         configureInningsStackView(score: score)
         boxScoreStackView.addArrangedSubview(runsHitsErrorsStackView)
         configureRunsHitsErrorsStackView(score: score)
-        boxScoreStackView.backgroundColor = Colors.separatorColor
         boxScoreStackView.leadingAnchor.constraint(equalTo: boxScoreContainer.leadingAnchor, constant: 10).isActive = true
-        boxScoreStackView.trailingAnchor.constraint(equalTo: boxScoreContainer.trailingAnchor, constant: -10).isActive = true
+        boxScoreStackView.rightAnchor.constraint(equalTo: boxScoreContainer.rightAnchor, constant: -10).isActive = true
+        boxScoreStackView.topAnchor.constraint(equalTo: boxScoreContainer.topAnchor, constant: 10).isActive = true
+        boxScoreStackView.bottomAnchor.constraint(equalTo: boxScoreContainer.bottomAnchor, constant: -10).isActive = true
     }
     
     private func configureTeamStackView(score: ScoreDisplay) {
@@ -192,9 +194,8 @@ class DetailedGameView: UIView {
         let view = UIStackView()
         view.translatesAutoresizingMaskIntoConstraints = false
         view.axis = .horizontal
-        view.alignment = .fill
+        view.alignment = .center
         view.distribution = .equalSpacing
-        view.spacing = 20
         return view
     }()
     
@@ -204,7 +205,7 @@ class DetailedGameView: UIView {
         view.axis = .vertical
         view.alignment = .center
         view.distribution = .equalSpacing
-        view.spacing = 0
+        view.spacing = 10
         return view
     }()
     
