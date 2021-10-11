@@ -23,15 +23,11 @@ class ScoreboardController: UIViewController {
     public var scores: [ScoreDisplay] = []
     public var sortedScores: [ScoreDisplay] = []
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(true)
+    override func viewDidLoad() {
+        super.viewDidLoad()
         getData()
         mapDataToScores()
         configureDateNavigationBar()
-    }
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
         setUpViews()
     }
     
@@ -87,8 +83,7 @@ class ScoreboardController: UIViewController {
             }
         }
         addTestCases()
-        #warning("fix array duplicating when coming back from detail view")
-                sortedScores.append(contentsOf: scores.sorted(by: {$0.gameDate < $1.gameDate}))
+        sortedScores.append(contentsOf: scores.sorted(by: {$0.gameDate < $1.gameDate}))
     }
     
     private func addTestCases() {
