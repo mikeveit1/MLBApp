@@ -76,6 +76,19 @@ class DetailedGameView: UIView {
         configureLabel(label: homeAbbreviationLabel, color: Colors.textColor, font: Fonts.mediumFont, data: score.homeTeamAbbreviation)
     }
     
+    private func formatRunsLabels(awayRuns: Int, homeRuns: Int, awayLabel: UILabel, homeLabel: UILabel) {
+        var homeFont = Fonts.mediumFont
+        var awayFont = Fonts.mediumFont
+        if awayRuns > 0 {
+            awayFont = Fonts.mediumFontBold
+        }
+        if homeRuns > 0 {
+            homeFont = Fonts.mediumFontBold
+        }
+        configureLabel(label: awayLabel, color: Colors.textColor, font: awayFont, data: "\(awayRuns)")
+        configureLabel(label: homeLabel, color: Colors.textColor, font: homeFont, data: "\(homeRuns)")
+    }
+    
     private func configureInningsStackView(score: ScoreDisplay) {
         for inning in score.innings {
             let numLabel = UILabel()
@@ -87,8 +100,7 @@ class DetailedGameView: UIView {
             currentInningStackView.alignment = .center
             currentInningStackView.spacing = 10
             configureLabel(label: numLabel, color: Colors.textColor, font: Fonts.mediumFont, data: "\(inning.num)")
-            configureLabel(label: awayRunsLabel, color: Colors.textColor, font: Fonts.mediumFont, data: "\(inning.away.runs ?? 0)")
-            configureLabel(label: homeRunsLabel, color: Colors.textColor, font: Fonts.mediumFont, data: "\(inning.home.runs ?? 0)")
+            formatRunsLabels(awayRuns: inning.away.runs ?? 0, homeRuns: inning.home.runs ?? 0, awayLabel: awayRunsLabel, homeLabel: homeRunsLabel)
             currentInningStackView.addArrangedSubview(numLabel)
             currentInningStackView.addArrangedSubview(awayRunsLabel)
             currentInningStackView.addArrangedSubview(homeRunsLabel)
@@ -109,9 +121,8 @@ class DetailedGameView: UIView {
         totalRunsStackView.addArrangedSubview(runsLabel)
         configureLabel(label: runsLabel, color: Colors.textColor, font: Fonts.mediumFont, data: "R")
         totalRunsStackView.addArrangedSubview(awayRunsLabel)
-        configureLabel(label: awayRunsLabel, color: Colors.textColor, font: Fonts.mediumFont, data: "\(score.awayTeamRuns)")
         totalRunsStackView.addArrangedSubview(homeRunsLabel)
-        configureLabel(label: homeRunsLabel, color: Colors.textColor, font: Fonts.mediumFont, data: "\(score.homeTeamRuns)")
+        formatRunsLabels(awayRuns: score.awayTeamRuns, homeRuns: score.homeTeamRuns, awayLabel: awayRunsLabel, homeLabel: homeRunsLabel)
     }
     
     private func configureTotalHitsStackView(score: ScoreDisplay) {

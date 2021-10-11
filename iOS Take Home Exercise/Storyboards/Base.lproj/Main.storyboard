@@ -212,7 +212,7 @@
                         <outlet property="logoNavigationBar" destination="oou-cw-qHQ" id="L82-ST-BUL"/>
                         <outlet property="scoreboardTable" destination="8jN-Ke-E5m" id="3br-Wd-Rmh"/>
                         <outlet property="tabBar" destination="anQ-ev-mVM" id="tjH-9T-Ecv"/>
-                        <segue destination="KhV-yS-E1K" kind="showDetail" identifier="detailSegue" id="Hij-cb-0TV"/>
+                        <segue destination="KhV-yS-E1K" kind="show" identifier="detailSegue" id="Hij-cb-0TV"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -222,15 +222,15 @@
         <!--Detailed Game View Controller-->
         <scene sceneID="CFu-PR-h4t">
             <objects>
-                <viewController storyboardIdentifier="DetailedGameViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="KhV-yS-E1K" customClass="DetailedGameViewController" customModule="iOS_Take_Home_Exercise" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="DetailedGameViewController" modalPresentationStyle="fullScreen" useStoryboardIdentifierAsRestorationIdentifier="YES" id="KhV-yS-E1K" customClass="DetailedGameViewController" customModule="iOS_Take_Home_Exercise" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="dc5-kI-mDU">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6WM-lk-72g">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="56"/>
+                                <rect key="frame" x="0.0" y="44" width="414" height="44"/>
                                 <items>
-                                    <navigationItem title="Title" id="7XS-zb-wUM">
+                                    <navigationItem id="7XS-zb-wUM">
                                         <barButtonItem key="leftBarButtonItem" title="Item" id="pXQ-RA-l42">
                                             <connections>
                                                 <action selector="backButtonPressed:" destination="KhV-yS-E1K" id="gl1-ID-9IF"/>
@@ -240,7 +240,7 @@
                                 </items>
                             </navigationBar>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OWD-WA-aDN" customClass="DetailedGameView" customModule="iOS_Take_Home_Exercise" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="56" width="414" height="737"/>
+                                <rect key="frame" x="0.0" y="88" width="414" height="725"/>
                             </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="0gE-Zr-G3l"/>
