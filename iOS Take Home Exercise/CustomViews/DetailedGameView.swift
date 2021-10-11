@@ -82,7 +82,6 @@ class DetailedGameView: UIView {
         teamStackView.addArrangedSubview(spacerLabel)
         teamStackView.addArrangedSubview(awayAbbreviationLabel)
         teamStackView.addArrangedSubview(homeAbbreviationLabel)
-        #warning("is this hacky")
         configureLabel(label: spacerLabel, color: Colors.backgroundColor, font: Fonts.mediumFont, data: " ")
         configureLabel(label: awayAbbreviationLabel, color: labelTextColor, font: Fonts.mediumFontBold, data: score.awayTeamAbbreviation)
         configureLabel(label: homeAbbreviationLabel, color: labelTextColor, font: Fonts.mediumFontBold, data: score.homeTeamAbbreviation)

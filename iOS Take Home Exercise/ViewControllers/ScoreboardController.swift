@@ -86,8 +86,7 @@ class ScoreboardController: UIViewController {
     }
     
     private func addTestCases() {
-        #warning("test cases - keep?")
-        //Using this function to show different game state cases
+        //Sample data only has games with status set to Final. Adds test data to account for other statuses. 
         let gameDateFormatter = DateFormatter()
         gameDateFormatter.dateFormat = gameDateFormat
         let gameDate = gameDateFormatter.date(from: "2018-09-20T23:10:00Z")!
@@ -257,7 +256,6 @@ class ScoreboardController: UIViewController {
 
 extension ScoreboardController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        #warning("should i put his condition in a variable? doesnt work when i try...maybe an enum?")
         if sortedScores.count > 0 {
             return sortedScores.count
         } else {
