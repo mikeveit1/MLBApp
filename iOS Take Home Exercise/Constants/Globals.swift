@@ -10,3 +10,4 @@ import Foundation
 import UIKit
 
 internal var cornerRadiusValue: CGFloat = 18
+internal var borderWidth: CGFloat = 1.0

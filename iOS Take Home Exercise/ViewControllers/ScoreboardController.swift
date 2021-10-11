@@ -148,7 +148,7 @@ class ScoreboardController: UIViewController {
         dateNavigationBar.isTranslucent = false
         dateNavigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor : Colors.textColor]
         dateNavigationBar.barTintColor = Colors.backgroundColor
-        dateNavigationBar.layer.borderWidth = 1.0
+        dateNavigationBar.layer.borderWidth = borderWidth
         dateNavigationBar.layer.borderColor = Colors.separatorColor.cgColor
         configureDateNavigationItems(item: dateItemLeft, left: true)
         configureDateNavigationItems(item: dateItemRight, left: false)
