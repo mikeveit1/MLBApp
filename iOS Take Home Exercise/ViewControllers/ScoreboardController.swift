@@ -145,7 +145,7 @@ class ScoreboardController: UIViewController {
     
     private func configureDateNavigationBar() {
         let dateLabel = UILabel()
-        dateLabel.textColor = Colors.textColor
+        dateLabel.textColor = labelTextColor
         dateFormatter.dateFormat = dayOfWeekFormat
         let dayOfWeekString = dateFormatter.string(from: currentDate)
         dateFormatter.dateFormat = monthDayFormat
@@ -154,7 +154,7 @@ class ScoreboardController: UIViewController {
         dateLabel.attributedText = formatAttributedString(string: currentDateString, range: monthDayString, attributes: [NSAttributedString.Key.font: Fonts.mediumFontBold])
         dateNavigationBar.topItem?.titleView = dateLabel
         dateNavigationBar.isTranslucent = false
-        dateNavigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor : Colors.textColor]
+        dateNavigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor : labelTextColor]
         dateNavigationBar.barTintColor = Colors.backgroundColor
         dateNavigationBar.layer.borderWidth = borderWidth
         dateNavigationBar.layer.borderColor = Colors.separatorColor.cgColor

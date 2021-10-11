@@ -33,7 +33,7 @@ class ScoreboardCell: UITableViewCell {
     
     public func handleNoScheduledGames(hideLabels: Bool) {
         noScheduledGamesLabel.isHidden = !hideLabels
-        configureLabel(label: noScheduledGamesLabel, color: Colors.textColor, font: Fonts.mediumFont, data: "No Scheduled Games")
+        configureLabel(label: noScheduledGamesLabel, color: labelTextColor, font: Fonts.mediumFont, data: "No Scheduled Games")
         for label in allLabels.filter({$0 != noScheduledGamesLabel }) {
             label.isHidden = hideLabels
         }
@@ -41,12 +41,12 @@ class ScoreboardCell: UITableViewCell {
     
     public func setData(score: ScoreDisplay) {
         handleNoScheduledGames(hideLabels: false)
-        configureLabel(label: awayNameLabel, color: Colors.textColor, font: Fonts.mediumFont, data: score.awayTeamName)
+        configureLabel(label: awayNameLabel, color: labelTextColor, font: Fonts.mediumFont, data: score.awayTeamName)
         configureLabel(label: awayRecordLabel, color: Colors.separatorColor, font: Fonts.smallFont, data: score.awayTeamRecord)
-        configureLabel(label: homeNameLabel, color: Colors.textColor, font: Fonts.mediumFont, data: score.homeTeamName)
+        configureLabel(label: homeNameLabel, color: labelTextColor, font: Fonts.mediumFont, data: score.homeTeamName)
         configureLabel(label: homeRecordLabel, color: Colors.separatorColor, font: Fonts.smallFont, data: score.homeTeamRecord)
-        configureLabel(label: awayScoreLabel, color: Colors.textColor, font: Fonts.largeFont, data: "\(score.awayTeamRuns)")
-        configureLabel(label: homeScoreLabel, color: Colors.textColor, font: Fonts.largeFont, data: "\(score.homeTeamRuns)")
+        configureLabel(label: awayScoreLabel, color: labelTextColor, font: Fonts.largeFont, data: "\(score.awayTeamRuns)")
+        configureLabel(label: homeScoreLabel, color: labelTextColor, font: Fonts.largeFont, data: "\(score.homeTeamRuns)")
         configureLabel(label: statusLabel, color: Colors.mlbBlue, font: Fonts.mediumFont, data: getGameStatus(score: score))
     }
     

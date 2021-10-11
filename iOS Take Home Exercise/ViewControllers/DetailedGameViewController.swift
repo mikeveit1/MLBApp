@@ -13,8 +13,6 @@ class DetailedGameViewController: UIViewController {
     @IBOutlet weak var detailedGameView: DetailedGameView!
     @IBOutlet weak var navigationBar: UINavigationBar!
     @IBOutlet weak var backButton: UIBarButtonItem!
-    
-    
     public var score: ScoreDisplay!
     
     override func viewWillAppear(_ animated: Bool) {

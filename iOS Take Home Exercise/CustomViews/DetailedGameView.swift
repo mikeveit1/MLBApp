@@ -11,8 +11,6 @@ import UIKit
 
 class DetailedGameView: UIView {
     private var innings: [Inning] = []
-    private var textColor: UIColor = Colors.textColor
-    private var boxScoreTextColor: UIColor = Colors.textColor
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -30,9 +28,9 @@ class DetailedGameView: UIView {
     
     public func setData(score: ScoreDisplay) {
         dateFormatter.dateFormat = monthDayYearFormat
-        configureLabel(label: teamsLabel, color: textColor, font: Fonts.mediumLargeFontBold, data: "\(score.awayTeamName) at \(score.homeTeamName)")
-        configureLabel(label: dateLabel, color: textColor, font: Fonts.mediumFont, data: dateFormatter.string(from: score.officialDate))
-        configureLabel(label: venueLabel, color: textColor, font: Fonts.mediumFont, data: "\(score.venueName) - \(score.venueCity), \(score.venueState)")
+        configureLabel(label: teamsLabel, color: labelTextColor, font: Fonts.mediumLargeFontBold, data: "\(score.awayTeamName) at \(score.homeTeamName)")
+        configureLabel(label: dateLabel, color: labelTextColor, font: Fonts.mediumFont, data: dateFormatter.string(from: score.officialDate))
+        configureLabel(label: venueLabel, color: labelTextColor, font: Fonts.mediumFont, data: "\(score.venueName) - \(score.venueCity), \(score.venueState)")
         configureBoxScoreStackView(score: score)
     }
     
@@ -54,21 +52,15 @@ class DetailedGameView: UIView {
         mainStackView.addArrangedSubview(venueLabel)
         mainStackView.addArrangedSubview(dateLabel)
         mainStackView.addArrangedSubview(boxScoreLabel)
-        configureLabel(label: boxScoreLabel, color: textColor, font: Fonts.mediumFontBold, data: "Box Score:")
+        configureLabel(label: boxScoreLabel, color: labelTextColor, font: Fonts.mediumFontBold, data: "Box Score:")
         mainStackView.addArrangedSubview(boxScoreContainer)
-        mainStackView.addArrangedSubview(boxScoreStackView)
         configureBoxScoreContainer()
     }
     
     private func configureBoxScoreContainer() {
         boxScoreContainer.leadingAnchor.constraint(equalTo: mainStackView.leadingAnchor).isActive = true
         boxScoreContainer.trailingAnchor.constraint(equalTo: mainStackView.trailingAnchor).isActive = true
-      //  boxScoreContainer.addSubview(boxScoreStackView)
-        let label = UILabel()
-        label.text = "container"
-        label.textColor = textColor
-        boxScoreContainer.addSubview(label)
-        boxScoreContainer.backgroundColor = .black
+        boxScoreContainer.addSubview(boxScoreStackView)
     }
     
     private func configureBoxScoreStackView(score: ScoreDisplay) {
@@ -79,7 +71,7 @@ class DetailedGameView: UIView {
         configureInningsStackView(score: score)
         boxScoreStackView.addArrangedSubview(runsHitsErrorsStackView)
         configureRunsHitsErrorsStackView(score: score)
-       // boxScoreStackView.backgroundColor = Colors.separatorColor
+        boxScoreStackView.backgroundColor = Colors.separatorColor
         boxScoreStackView.leadingAnchor.constraint(equalTo: boxScoreContainer.leadingAnchor, constant: 10).isActive = true
         boxScoreStackView.trailingAnchor.constraint(equalTo: boxScoreContainer.trailingAnchor, constant: -10).isActive = true
     }
@@ -89,8 +81,8 @@ class DetailedGameView: UIView {
         teamStackView.addArrangedSubview(awayAbbreviationLabel)
         teamStackView.addArrangedSubview(homeAbbreviationLabel)
         configureLabel(label: spacerLabel, color: Colors.backgroundColor, font: Fonts.mediumFont, data: " ")
-        configureLabel(label: awayAbbreviationLabel, color: boxScoreTextColor, font: Fonts.mediumFontBold, data: score.awayTeamAbbreviation)
-        configureLabel(label: homeAbbreviationLabel, color: boxScoreTextColor, font: Fonts.mediumFontBold, data: score.homeTeamAbbreviation)
+        configureLabel(label: awayAbbreviationLabel, color: labelTextColor, font: Fonts.mediumFontBold, data: score.awayTeamAbbreviation)
+        configureLabel(label: homeAbbreviationLabel, color: labelTextColor, font: Fonts.mediumFontBold, data: score.homeTeamAbbreviation)
     }
     
     private func formatRunsLabels(awayRuns: Int, homeRuns: Int, awayLabel: UILabel, homeLabel: UILabel) {
@@ -102,8 +94,8 @@ class DetailedGameView: UIView {
         if homeRuns > 0 {
             homeFont = Fonts.mediumFontBold
         }
-        configureLabel(label: awayLabel, color: boxScoreTextColor, font: awayFont, data: "\(awayRuns)")
-        configureLabel(label: homeLabel, color: boxScoreTextColor, font: homeFont, data: "\(homeRuns)")
+        configureLabel(label: awayLabel, color: labelTextColor, font: awayFont, data: "\(awayRuns)")
+        configureLabel(label: homeLabel, color: labelTextColor, font: homeFont, data: "\(homeRuns)")
     }
     
     private func configureInningsStackView(score: ScoreDisplay) {
@@ -116,7 +108,7 @@ class DetailedGameView: UIView {
             currentInningStackView.distribution = .fill
             currentInningStackView.alignment = .center
             currentInningStackView.spacing = 10
-            configureLabel(label: numLabel, color: boxScoreTextColor, font: Fonts.mediumFont, data: "\(inning.num)")
+            configureLabel(label: numLabel, color: labelTextColor, font: Fonts.mediumFont, data: "\(inning.num)")
             formatRunsLabels(awayRuns: inning.away.runs ?? 0, homeRuns: inning.home.runs ?? 0, awayLabel: awayRunsLabel, homeLabel: homeRunsLabel)
             currentInningStackView.addArrangedSubview(numLabel)
             currentInningStackView.addArrangedSubview(awayRunsLabel)
@@ -136,7 +128,7 @@ class DetailedGameView: UIView {
     
     private func configureTotalRunsStackView(score: ScoreDisplay) {
         totalRunsStackView.addArrangedSubview(runsLabel)
-        configureLabel(label: runsLabel, color: boxScoreTextColor, font: Fonts.mediumFont, data: "R")
+        configureLabel(label: runsLabel, color: labelTextColor, font: Fonts.mediumFont, data: "R")
         totalRunsStackView.addArrangedSubview(awayRunsLabel)
         totalRunsStackView.addArrangedSubview(homeRunsLabel)
         formatRunsLabels(awayRuns: score.awayTeamRuns, homeRuns: score.homeTeamRuns, awayLabel: awayRunsLabel, homeLabel: homeRunsLabel)
@@ -144,20 +136,20 @@ class DetailedGameView: UIView {
     
     private func configureTotalHitsStackView(score: ScoreDisplay) {
         totalHitsStackView.addArrangedSubview(hitsLabel)
-        configureLabel(label: hitsLabel, color: boxScoreTextColor, font: Fonts.mediumFont, data: "H")
+        configureLabel(label: hitsLabel, color: labelTextColor, font: Fonts.mediumFont, data: "H")
         totalHitsStackView.addArrangedSubview(awayHitsLabel)
-        configureLabel(label: awayHitsLabel, color: boxScoreTextColor, font: Fonts.mediumFont, data: "\(score.awayTeamHits)")
+        configureLabel(label: awayHitsLabel, color: labelTextColor, font: Fonts.mediumFont, data: "\(score.awayTeamHits)")
         totalHitsStackView.addArrangedSubview(homeHitsLabel)
-        configureLabel(label: homeHitsLabel, color: boxScoreTextColor, font: Fonts.mediumFont, data: "\(score.homeTeamHits)")
+        configureLabel(label: homeHitsLabel, color: labelTextColor, font: Fonts.mediumFont, data: "\(score.homeTeamHits)")
     }
     
     private func configureTotalErrorsStackView(score: ScoreDisplay) {
         totalErrorsStackView.addArrangedSubview(errorsLabel)
-        configureLabel(label: errorsLabel, color: boxScoreTextColor, font: Fonts.mediumFont, data: "E")
+        configureLabel(label: errorsLabel, color: labelTextColor, font: Fonts.mediumFont, data: "E")
         totalErrorsStackView.addArrangedSubview(awayErrorsLabel)
-        configureLabel(label: awayErrorsLabel, color: boxScoreTextColor, font: Fonts.mediumFont, data: "\(score.awayTeamErrors)")
+        configureLabel(label: awayErrorsLabel, color: labelTextColor, font: Fonts.mediumFont, data: "\(score.awayTeamErrors)")
         totalErrorsStackView.addArrangedSubview(homeErrorsLabel)
-        configureLabel(label: homeErrorsLabel, color: boxScoreTextColor, font: Fonts.mediumFont, data: "\(score.homeTeamErrors)")
+        configureLabel(label: homeErrorsLabel, color: labelTextColor, font: Fonts.mediumFont, data: "\(score.homeTeamErrors)")
     }
     
     public func configureLabel(label: UILabel, color: UIColor, font: UIFont, data: String) {
