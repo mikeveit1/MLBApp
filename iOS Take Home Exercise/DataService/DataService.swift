@@ -11,8 +11,8 @@ import Foundation
 class DataService {
     static let shared = DataService()
     
-    public func getData(completion: (Data) -> Void, errorHandler: (Error) -> Void) {
-        guard let url =  URL(string: "https://statsapi.mlb.com/api/v1/schedule?hydrate=team(league),venue(location,timezone),linescore&date=2018-09-19&sportId=1,51&language=en") else { return }
+    public func getData(date: String, completion: (Data) -> Void, errorHandler: (Error) -> Void) {
+        guard let url =  URL(string: "https://statsapi.mlb.com/api/v1/schedule?hydrate=team(league),venue(location,timezone),linescore&date=\(date)&sportId=1,51&language=en") else { return }
         do {
             let data = try Data(contentsOf: url)
             completion(data)

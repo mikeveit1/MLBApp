@@ -110,7 +110,7 @@ class DetailedGameView: UIView {
             currentInningStackView.distribution = .fill
             currentInningStackView.alignment = .center
             currentInningStackView.spacing = 10
-            configureLabel(label: numLabel, color: labelTextColor, font: Fonts.mediumFont, data: "\(inning.num)")
+            configureLabel(label: numLabel, color: labelTextColor, font: Fonts.mediumFont, data: "\(inning.num )")
             formatRunsLabels(awayRuns: inning.away.runs ?? 0, homeRuns: inning.home.runs ?? 0, awayLabel: awayRunsLabel, homeLabel: homeRunsLabel)
             currentInningStackView.addArrangedSubview(numLabel)
             currentInningStackView.addArrangedSubview(awayRunsLabel)

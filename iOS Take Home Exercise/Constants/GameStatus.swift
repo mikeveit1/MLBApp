@@ -10,8 +10,8 @@ import Foundation
 import UIKit
 
 enum GameStatus: String {
-    case notStarted = "Not_Started"
-    case inProgress = "In_Progress"
+    case scheduled = "Scheduled"
+    case inProgress = "In Progress"
     case completed = "Final"
 }
 
@@ -28,7 +28,7 @@ internal func getGameStatus(score: ScoreDisplay) -> String {
         case .inProgress:
             status = "\(score.inningHalf) \(score.inningOrdinal)"
             break
-        case .notStarted:
+        case .scheduled:
             dateFormatter.dateFormat = timeFormat
             status = dateFormatter.string(from: score.gameDate)
             break

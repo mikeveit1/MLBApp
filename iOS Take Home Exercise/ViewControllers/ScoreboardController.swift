@@ -25,14 +25,20 @@ class ScoreboardController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        getData()
-        mapDataToScores()
+        getData(date: getCurrentDateString(date: currentDate, format: officialDateFormat))
         configureDateNavigationBar()
         setUpViews()
     }
     
-    private func getData() {
-        DataService.shared.getData() { (data) in
+    private func clearDataArrays() {
+        dates.removeAll()
+        scores.removeAll()
+        sortedScores.removeAll()
+    }
+    
+    private func getData(date: String) {
+        clearDataArrays()
+        DataService.shared.getData(date: date) { (data) in
             do {
                 let decoder = JSONDecoder()
                 let json = try decoder.decode(Response.self, from: data)
@@ -46,6 +52,7 @@ class ScoreboardController: UIViewController {
             print(error.localizedDescription)
             showErrorAlert(title: "Error", message: error.localizedDescription)
         }
+        mapDataToScores()
     }
     
     private func mapDataToScores() {
@@ -81,44 +88,7 @@ class ScoreboardController: UIViewController {
                 scores.append(score)
             }
         }
-        addTestCases()
-        sortedScores.append(contentsOf: scores.sorted(by: {$0.gameDate < $1.gameDate}))
-    }
-    
-    private func addTestCases() {
-        //Sample data only has games with status set to Final. Adds test data to account for other statuses. 
-        let gameDateFormatter = DateFormatter()
-        gameDateFormatter.dateFormat = gameDateFormat
-        let gameDate = gameDateFormatter.date(from: "2018-09-20T23:10:00Z")!
-        let awayTeam = "Nationals"
-        let awayTeamAbbreviation = "WAS"
-        let homeTeam = "Marlins"
-        let homeTeamAbbreviation = "MIA"
-        let venueName = "LoanDepot Park"
-        let venueCity = "Miami"
-        let venueState = "Florida"
-        let awayTeamRecord = "75-77"
-        let homeTeamRecord = "61-92"
-        let scheduledInnings = 9
-        let nineInnings = getTestInnings(lastInning: 9)
-        let tenInnings = getTestInnings(lastInning: 10)
-        let sevenInnings = getTestInnings(lastInning: 7)
-        let cases = [
-            ScoreDisplay(officialDate: currentDate, gameDate: gameDate, awayTeamName: awayTeam, awayTeamAbbreviation: awayTeamAbbreviation, awayTeamRecord: awayTeamRecord, homeTeamName: homeTeam, homeTeamAbbreviation: homeTeamAbbreviation, homeTeamRecord: homeTeamRecord, awayTeamRuns: 1, awayTeamHits: 1, awayTeamErrors: 0, homeTeamRuns: 0, homeTeamHits: 0, homeTeamErrors: 0, inning: 10, inningOrdinal: "10th", inningHalf: "Bottom", gameState: "Final", scheduledInnings: scheduledInnings, venueName: venueName, venueCity: venueCity, venueState: venueState, innings: tenInnings),
-            ScoreDisplay(officialDate: currentDate, gameDate: gameDate, awayTeamName: awayTeam, awayTeamAbbreviation: awayTeamAbbreviation, awayTeamRecord: awayTeamRecord, homeTeamName: homeTeam, homeTeamAbbreviation: homeTeamAbbreviation, homeTeamRecord: homeTeamRecord, awayTeamRuns: 5,awayTeamHits: 1, awayTeamErrors: 0, homeTeamRuns: 0, homeTeamHits: 0, homeTeamErrors: 0, inning: 7, inningOrdinal: "7th", inningHalf: "Top", gameState: "In_Progress", scheduledInnings: scheduledInnings, venueName: venueName, venueCity: venueCity, venueState: venueState, innings: nineInnings),
-            ScoreDisplay(officialDate: currentDate, gameDate: gameDate, awayTeamName: awayTeam,  awayTeamAbbreviation: awayTeamAbbreviation, awayTeamRecord: awayTeamRecord, homeTeamName: homeTeam, homeTeamAbbreviation: homeTeamAbbreviation, homeTeamRecord: homeTeamRecord, awayTeamRuns: 2, awayTeamHits: 1, awayTeamErrors: 0, homeTeamRuns: 0, homeTeamHits: 0, homeTeamErrors: 0, inning: 7, inningOrdinal: "7th", inningHalf: "Bottom", gameState: "Final", scheduledInnings: scheduledInnings, venueName: venueName, venueCity: venueCity, venueState: venueState, innings: sevenInnings),
-            ScoreDisplay(officialDate: currentDate, gameDate: gameDate, awayTeamName: awayTeam, awayTeamAbbreviation: awayTeamAbbreviation, awayTeamRecord: awayTeamRecord, homeTeamName: homeTeam, homeTeamAbbreviation: homeTeamAbbreviation, homeTeamRecord: homeTeamRecord, awayTeamRuns: 0, awayTeamHits: 0, awayTeamErrors: 0, homeTeamRuns: 0, homeTeamHits: 0, homeTeamErrors: 0, inning: 0, inningOrdinal: "", inningHalf: "", gameState: "Not_Started", scheduledInnings: scheduledInnings, venueName: venueName, venueCity: venueCity, venueState: venueState, innings: nineInnings)
-        ]
-        scores.append(contentsOf: cases)
-    }
-    
-    private func getTestInnings(lastInning: Int) -> [Inning] {
-        var array = [Inning]()
-        for number in 1...lastInning {
-            let inning = Inning(num: number, home: InningTeam(runs: 0), away: InningTeam(runs: 0))
-            array.append(inning)
-        }
-       return array
+        sortedScores.append(contentsOf: scores.filter({$0.officialDate == currentDate}).sorted(by: {$0.gameDate < $1.gameDate}))
     }
 
     private func setUpViews() {
@@ -220,7 +190,9 @@ class ScoreboardController: UIViewController {
             currentDate = date!
         }
         configureDateNavigationBar()
-        sortedScores = scores.filter({$0.officialDate == currentDate})
+        //sortedScores = scores.filter({$0.officialDate == currentDate})
+        getData(date: getCurrentDateString(date: currentDate, format: officialDateFormat))
+        print("current date", currentDate)
         scoreboardTable.reloadData()
     }
     
@@ -270,9 +242,11 @@ extension ScoreboardController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "scoreboardCell") as! ScoreboardCell
         if sortedScores.count > 0 {
+            cell.isUserInteractionEnabled = true
             cell.setData(score: sortedScores[indexPath.row])
             scoreboardTable.separatorStyle  = .singleLine
         } else {
+            cell.isUserInteractionEnabled = false
             scoreboardTable.separatorStyle  = .none
             cell.handleNoScheduledGames(hideLabels: true)
         }
