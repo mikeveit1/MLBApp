@@ -186,9 +186,7 @@ class ScoreboardController: UIViewController {
             currentDate = date!
         }
         configureDateNavigationBar()
-        //sortedScores = scores.filter({$0.officialDate == currentDate})
         getData(date: getCurrentDateString(date: currentDate, format: officialDateFormat))
-        print("current date", currentDate)
         scoreboardTable.reloadData()
     }
     
