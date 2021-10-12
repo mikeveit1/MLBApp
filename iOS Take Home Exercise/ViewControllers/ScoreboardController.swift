@@ -86,7 +86,7 @@ class ScoreboardController: UIViewController {
                 scores.append(score)
             }
         }
-        sortedScores.append(contentsOf: scores.filter({$0.officialDate == currentDate}).sorted(by: {$0.gameDate < $1.gameDate}))
+        sortedScores.append(contentsOf: scores.sorted(by: {$0.gameDate < $1.gameDate}))
     }
 
     private func setUpViews() {
