@@ -25,7 +25,7 @@ class ScoreboardController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        getData(date: getCurrentDateString(date: currentDate, format: officialDateFormat))
+        getData(date: getDateString(date: currentDate, format: officialDateFormat))
         configureDateNavigationBar()
         setUpViews()
     }
@@ -58,10 +58,10 @@ class ScoreboardController: UIViewController {
     private func mapDataToScores() {
         var score = ScoreDisplay(officialDate: Date(), gameDate: Date(), awayTeamName: "", awayTeamAbbreviation: "", awayTeamRecord: "", homeTeamName: "", homeTeamAbbreviation: "", homeTeamRecord: "", awayTeamRuns: 0, awayTeamHits: 0, awayTeamErrors: 0, homeTeamRuns: 0, homeTeamHits: 0, homeTeamErrors: 0, inning: 0, inningOrdinal: "0", inningHalf: "Top", gameState: "", scheduledInnings: 0, venueName: "", venueCity: "", venueState: "", innings: [Inning(num: 0, home: InningTeam(runs: 0), away: InningTeam(runs: 0))])
         for date in dates {
-            score.officialDate = getCurrentDate(date: date.date, format: officialDateFormat)
+            score.officialDate = getDate(date: date.date, format: officialDateFormat)
             currentDate = score.officialDate
             for game in date.games ?? [] {
-                score.gameDate = getCurrentDate(date: game.gameDate ?? "", format: gameDateFormat)
+                score.gameDate = getDate(date: game.gameDate ?? "", format: gameDateFormat)
                 score.awayTeamName = game.teams?.away?.team?.teamName ?? ""
                 score.awayTeamAbbreviation = game.teams?.away?.team?.abbreviation ?? ""
                 score.awayTeamRuns = game.linescore?.teams?.away?.runs ?? 0
@@ -113,8 +113,8 @@ class ScoreboardController: UIViewController {
     private func configureDateNavigationBar() {
         let dateLabel = UILabel()
         dateLabel.textColor = labelTextColor
-        let dayOfWeekString = getCurrentDateString(date: currentDate, format: dayOfWeekFormat)
-        let monthDayString = getCurrentDateString(date: currentDate, format: monthDayFormat)
+        let dayOfWeekString = getDateString(date: currentDate, format: dayOfWeekFormat)
+        let monthDayString = getDateString(date: currentDate, format: monthDayFormat)
         let currentDateString = "\(dayOfWeekString) \(monthDayString)"
         dateLabel.attributedText = formatAttributedString(string: currentDateString, range: monthDayString, attributes: [NSAttributedString.Key.font: Fonts.mediumFontBold])
         dateNavigationBar.topItem?.titleView = dateLabel
@@ -186,7 +186,7 @@ class ScoreboardController: UIViewController {
             currentDate = date!
         }
         configureDateNavigationBar()
-        getData(date: getCurrentDateString(date: currentDate, format: officialDateFormat))
+        getData(date: getDateString(date: currentDate, format: officialDateFormat))
         scoreboardTable.reloadData()
     }
     

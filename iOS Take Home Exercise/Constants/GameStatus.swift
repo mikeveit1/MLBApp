@@ -29,7 +29,7 @@ internal func getGameStatus(score: ScoreDisplay) -> String {
             status = "\(score.inningHalf) \(score.inningOrdinal)"
             break
         case .preview:
-            status = getCurrentDateString(date: score.gameDate, format: timeFormat)
+            status = getDateString(date: score.gameDate, format: timeFormat)
             break
         }
     }

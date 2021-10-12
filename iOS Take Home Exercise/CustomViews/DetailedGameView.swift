@@ -28,7 +28,7 @@ class DetailedGameView: UIView {
     
     public func setData(score: ScoreDisplay) {
         configureLabel(label: teamsLabel, color: labelTextColor, font: Fonts.mediumLargeFontBold, data: "\(score.awayTeamName) @ \(score.homeTeamName)")
-        configureLabel(label: dateLabel, color: labelTextColor, font: Fonts.mediumFont, data: getCurrentDateString(date: score.officialDate, format: monthDayYearFormat))
+        configureLabel(label: dateLabel, color: labelTextColor, font: Fonts.mediumFont, data: getDateString(date: score.officialDate, format: monthDayYearFormat))
         configureLabel(label: venueLabel, color: labelTextColor, font: Fonts.mediumFont, data: "\(score.venueName) - \(score.venueCity), \(score.venueState)")
         configureBoxScoreContainer(score: score)
     }

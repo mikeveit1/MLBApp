@@ -17,12 +17,12 @@ internal var dayOfWeekFormat = "EEEE"
 internal var monthDayFormat = "MMMM d"
 internal var monthDayYearFormat = "MMMM d, yyyy"
 
-internal func getCurrentDateString(date: Date, format: String ) -> String {
+internal func getDateString(date: Date, format: String ) -> String {
     dateFormatter.dateFormat = format
     return dateFormatter.string(from: date)
 }
 
-internal func getCurrentDate(date: String, format: String ) -> Date {
+internal func getDate(date: String, format: String ) -> Date {
     dateFormatter.dateFormat = format
     return dateFormatter.date(from: date)!
 }
