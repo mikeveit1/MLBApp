@@ -9,11 +9,11 @@
 import Foundation
 
 struct Game: Codable {
-    var gameDate: String
-    var status: Status
-    var teams: Teams
-    var linescore: Linescore
-    var venue: Venue
+    var gameDate: String?
+    var status: Status?
+    var teams: Teams?
+    var linescore: Linescore?
+    var venue: Venue?
     
     init(gameDate: String, status: Status, teams: Teams, linescore: Linescore, venue: Venue) {
         self.gameDate = gameDate

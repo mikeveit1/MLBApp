@@ -10,16 +10,16 @@ import Foundation
 import UIKit
 
 enum GameStatus: String {
-    case scheduled = "Scheduled"
-    case inProgress = "In Progress"
-    case completed = "Final"
+    case preview = "Preview"
+    case inProgress = "Live"
+    case final = "Final"
 }
 
 internal func getGameStatus(score: ScoreDisplay) -> String {
     var status = String()
     if let state = GameStatus.init(rawValue: score.gameState) {
         switch state {
-        case .completed:
+        case .final:
             status = score.gameState
             if score.inning != score.scheduledInnings {
                 status = "F/\(score.inning)"
@@ -28,9 +28,8 @@ internal func getGameStatus(score: ScoreDisplay) -> String {
         case .inProgress:
             status = "\(score.inningHalf) \(score.inningOrdinal)"
             break
-        case .scheduled:
-            dateFormatter.dateFormat = timeFormat
-            status = dateFormatter.string(from: score.gameDate)
+        case .preview:
+            status = getCurrentDateString(date: score.gameDate, format: timeFormat)
             break
         }
     }

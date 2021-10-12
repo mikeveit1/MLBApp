@@ -9,9 +9,9 @@
 import Foundation
 
 struct Inning: Codable {
-    var num: Int
-    var home: InningTeam
-    var away: InningTeam
+    var num: Int?
+    var home: InningTeam?
+    var away: InningTeam?
     
     init(num: Int, home: InningTeam, away: InningTeam) {
         self.num = num

@@ -9,8 +9,8 @@
 import Foundation
 
 struct LeagueRecord: Codable {
-    var wins: Int
-    var losses: Int
+    var wins: Int?
+    var losses: Int?
     
     init(wins: Int, losses: Int) {
         self.wins = wins

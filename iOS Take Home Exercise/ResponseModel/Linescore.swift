@@ -9,12 +9,12 @@
 import Foundation
 
 struct Linescore: Codable {
-    var currentInning: Int
-    var currentInningOrdinal: String
-    var inningHalf: String
-    var teams: LinescoreTeams
-    var scheduledInnings: Int
-    var innings: [Inning]
+    var currentInning: Int?
+    var currentInningOrdinal: String?
+    var inningHalf: String?
+    var teams: LinescoreTeams?
+    var scheduledInnings: Int?
+    var innings: [Inning]?
     
     init(currentInning: Int, currentInningOrdinal: String, inningHalf: String, teams: LinescoreTeams, scheduledInnings: Int, innings: [Inning]) {
         self.currentInning = currentInning

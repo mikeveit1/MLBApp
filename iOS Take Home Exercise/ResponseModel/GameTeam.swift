@@ -9,9 +9,9 @@
 import Foundation
 
 struct GameTeam: Codable {
-    var score: Int
-    var team: Team
-    var leagueRecord: LeagueRecord
+    var score: Int?
+    var team: Team?
+    var leagueRecord: LeagueRecord?
     
     init(score: Int, team: Team, leagueRecord: LeagueRecord) {
         self.score = score

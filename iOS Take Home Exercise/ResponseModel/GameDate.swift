@@ -10,7 +10,7 @@ import Foundation
 
 struct GameDate: Codable {
     var date: String
-    var games: [Game]
+    var games: [Game]?
     
     init(date: String, games: [Game]) {
         self.date = date

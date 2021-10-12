@@ -9,8 +9,8 @@
 import Foundation
 
 struct Venue: Codable {
-    var name: String
-    var location: VenueLocation
+    var name: String?
+    var location: VenueLocation?
     
     init(name: String, location: VenueLocation) {
         self.name = name

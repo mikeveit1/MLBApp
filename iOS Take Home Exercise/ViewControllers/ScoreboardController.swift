@@ -58,33 +58,31 @@ class ScoreboardController: UIViewController {
     private func mapDataToScores() {
         var score = ScoreDisplay(officialDate: Date(), gameDate: Date(), awayTeamName: "", awayTeamAbbreviation: "", awayTeamRecord: "", homeTeamName: "", homeTeamAbbreviation: "", homeTeamRecord: "", awayTeamRuns: 0, awayTeamHits: 0, awayTeamErrors: 0, homeTeamRuns: 0, homeTeamHits: 0, homeTeamErrors: 0, inning: 0, inningOrdinal: "0", inningHalf: "Top", gameState: "", scheduledInnings: 0, venueName: "", venueCity: "", venueState: "", innings: [Inning(num: 0, home: InningTeam(runs: 0), away: InningTeam(runs: 0))])
         for date in dates {
-            dateFormatter.dateFormat = officialDateFormat
-            score.officialDate = dateFormatter.date(from: date.date)!
+            score.officialDate = getCurrentDate(date: date.date, format: officialDateFormat)
             currentDate = score.officialDate
-            for game in date.games {
-                dateFormatter.dateFormat = gameDateFormat
-                score.gameDate = dateFormatter.date(from: game.gameDate)!
-                score.awayTeamName = game.teams.away.team.teamName
-                score.awayTeamAbbreviation = game.teams.away.team.abbreviation
-                score.awayTeamRuns = game.linescore.teams.away.runs
-                score.awayTeamHits = game.linescore.teams.away.hits
-                score.awayTeamErrors = game.linescore.teams.away.errors
-                score.awayTeamRecord = "\(game.teams.away.leagueRecord.wins) - \(game.teams.away.leagueRecord.losses)"
-                score.homeTeamName = game.teams.home.team.teamName
-                score.homeTeamAbbreviation = game.teams.home.team.abbreviation
-                score.homeTeamRuns = game.linescore.teams.home.runs
-                score.homeTeamHits = game.linescore.teams.home.hits
-                score.homeTeamErrors = game.linescore.teams.home.errors
-                score.homeTeamRecord = "\(game.teams.home.leagueRecord.wins) - \(game.teams.home.leagueRecord.losses)"
-                score.inning = game.linescore.currentInning
-                score.inningOrdinal = game.linescore.currentInningOrdinal
-                score.inningHalf = game.linescore.inningHalf
-                score.gameState = game.status.detailedState
-                score.scheduledInnings = game.linescore.scheduledInnings
-                score.venueName = game.venue.name
-                score.venueCity = game.venue.location.city
-                score.venueState = game.venue.location.state
-                score.innings = game.linescore.innings
+            for game in date.games ?? [] {
+                score.gameDate = getCurrentDate(date: game.gameDate ?? "", format: gameDateFormat)
+                score.awayTeamName = game.teams?.away?.team?.teamName ?? ""
+                score.awayTeamAbbreviation = game.teams?.away?.team?.abbreviation ?? ""
+                score.awayTeamRuns = game.linescore?.teams?.away?.runs ?? 0
+                score.awayTeamHits = game.linescore?.teams?.away?.hits ?? 0
+                score.awayTeamErrors = game.linescore?.teams?.away?.errors ?? 0
+                score.awayTeamRecord = "\(game.teams?.away?.leagueRecord?.wins ?? 0) - \(game.teams?.away?.leagueRecord?.losses ?? 0)"
+                score.homeTeamName = game.teams?.home?.team?.teamName ?? ""
+                score.homeTeamAbbreviation = game.teams?.home?.team?.abbreviation ?? ""
+                score.homeTeamRuns = game.linescore?.teams?.home?.runs ?? 0
+                score.homeTeamHits = game.linescore?.teams?.home?.hits ?? 0
+                score.homeTeamErrors = game.linescore?.teams?.home?.errors ?? 0
+                score.homeTeamRecord = "\(game.teams?.home?.leagueRecord?.wins ?? 0) - \(game.teams?.home?.leagueRecord?.losses ?? 0)"
+                score.inning = game.linescore?.currentInning ?? 0
+                score.inningOrdinal = game.linescore?.currentInningOrdinal ?? ""
+                score.inningHalf = game.linescore?.inningHalf ?? ""
+                score.gameState = game.status?.abstractGameState ?? ""
+                score.scheduledInnings = game.linescore?.scheduledInnings ?? 9
+                score.venueName = game.venue?.name ?? ""
+                score.venueCity = game.venue?.location?.city ?? ""
+                score.venueState = game.venue?.location?.state ?? ""
+                score.innings = game.linescore?.innings ?? []
                 scores.append(score)
             }
         }
@@ -115,10 +113,8 @@ class ScoreboardController: UIViewController {
     private func configureDateNavigationBar() {
         let dateLabel = UILabel()
         dateLabel.textColor = labelTextColor
-        dateFormatter.dateFormat = dayOfWeekFormat
-        let dayOfWeekString = dateFormatter.string(from: currentDate)
-        dateFormatter.dateFormat = monthDayFormat
-        let monthDayString = dateFormatter.string(from: currentDate)
+        let dayOfWeekString = getCurrentDateString(date: currentDate, format: dayOfWeekFormat)
+        let monthDayString = getCurrentDateString(date: currentDate, format: monthDayFormat)
         let currentDateString = "\(dayOfWeekString) \(monthDayString)"
         dateLabel.attributedText = formatAttributedString(string: currentDateString, range: monthDayString, attributes: [NSAttributedString.Key.font: Fonts.mediumFontBold])
         dateNavigationBar.topItem?.titleView = dateLabel

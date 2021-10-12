@@ -9,8 +9,8 @@
 import Foundation
 
 struct Teams: Codable {
-    var away: GameTeam
-    var home: GameTeam
+    var away: GameTeam?
+    var home: GameTeam?
     
     init(away: GameTeam, home: GameTeam) {
         self.away = away

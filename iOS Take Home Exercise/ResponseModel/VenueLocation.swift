@@ -9,8 +9,8 @@
 import Foundation
 
 struct VenueLocation: Codable {
-    var city: String
-    var state: String
+    var city: String?
+    var state: String?
     
     init(city: String, state: String) {
         self.city = city

@@ -9,9 +9,9 @@
 import Foundation
 
 struct Status: Codable {
-    var detailedState: String
+    var abstractGameState: String?
     
-    init(detailedState: String) {
-        self.detailedState = detailedState
+    init(abstractGameState: String) {
+        self.abstractGameState = abstractGameState
     }
 }
