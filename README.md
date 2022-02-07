@@ -1,4 +1,4 @@
-#  MLB iOS Take Home Exercise
+#  MLB App
 
 ## Objective
 The goal of this exercise is to demonstrate that given:
